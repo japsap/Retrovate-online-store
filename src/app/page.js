@@ -8,6 +8,7 @@ import { frequentlyAskedQuestions, swiperGallery } from "@/constants/Data";
 
 import { ArrowDown, ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Navbar from "@components/Navbar";
 
 const page = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -18,6 +19,7 @@ const page = () => {
 
   return (
     <div>
+      <Navbar/>
       <header className="min-h-screen flex-center">
         <div className="column gap-10 -mt-[100px]">
           <h1 className="text-6xl lg:text-9xl text-center">

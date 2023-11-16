@@ -16,6 +16,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        'login-image': "url('/images/bg.png')"
+      },
       colors: {
         primaryColor: "var(--primaryColor)",
         border: "hsl(var(--border))",
