@@ -6,7 +6,7 @@ import { ShoppingCart }  from 'lucide-react'
 
 const Navbar = () => {
   return (
-    <div className='sticky w-full top-0 bg-white z-[9999999999]'>
+    <div className='sticky w-full top-0 bg-white z-[9]'>
        <div className='flex-between max-w-7xl mx-auto p-5'>
         <Logo/>
 
@@ -17,7 +17,7 @@ const Navbar = () => {
         </ul>
 
         <div className='hidden lg:flex items-center gap-3'>
-          <button className='fill-btn'>Register</button>
+          <button className='fill-btn'><a href='/account'>Register</a></button>
             <div className='relative'>
               <button className='outline-btn'>
                 <ShoppingCart size={18}/>
