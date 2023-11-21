@@ -17,6 +17,25 @@ export const mainPageNavbar = [
   },
 ];
 
+export const LoggedNavLinks = [
+  {
+    name: "New",
+    // path: "/",
+  },
+  {
+    name: "Products",
+    // path: "#about_section",
+  },
+  {
+    name: "Rooms",
+    // path: "#testimonials_section",
+  },
+  {
+    name: "Inspirations",
+    // path: "#contact_form",
+  },
+]
+
 export const swiperGallery = [
   {
     img: "https://images.pexels.com/photos/2079246/pexels-photo-2079246.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -72,3 +91,51 @@ export const frequentlyAskedQuestions = [
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
   },
 ];
+
+
+export const sofaSwiper = [ 
+  {
+    name:'Sofa Stockholm',
+    image: '/images/sofas/sofa-1.png',
+    desc: 'Great sofa',
+    price: 1400
+  },
+  {
+    name:'Sofa Linanas',
+    image: '/images/sofas/sofa-2.png',
+    desc: 'Great sofa',
+    price: 1450
+  },
+  {
+    name:'Sofa Kikvik',
+    image: '/images/sofas/sofa-3.jpeg',
+    desc: 'Great sofa',
+    price: 1550
+  },
+  {
+    name:'Sofa Visele',
+    image: '/images/sofas/sofa-4.png',
+    desc: 'Great sofa',
+    price: 1900
+  },
+  {
+    name:'Sofa Visele',
+    image: '/images/sofas/sofa-4.png',
+    desc: 'Great sofa',
+    price: 1900
+  },
+  {
+    name:'Sofa Visele',
+    image: '/images/sofas/sofa-4.png',
+    desc: 'Great sofa',
+    price: 1900
+  },
+  {
+    name:'Sofa Visele',
+    image: '/images/sofas/sofa-4.png',
+    desc: 'Great sofa',
+    price: 1900
+  },
+  
+  
+]

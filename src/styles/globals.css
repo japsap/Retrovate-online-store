@@ -7,7 +7,7 @@ h1,h2,h3,span{
 }
 
 :root{
-  --primaryColor: #D08702;
+  --primaryColor: #F6C42E;
 }
  
 @layer base {
@@ -126,4 +126,13 @@ h1,h2,h3,span{
   height: 1px;
   background: rgb(255,255,255);
   background: radial-gradient(circle, rgba(255,255,255,1) 21%, rgba(254,254,255,0) 81%);
+}
+
+.underlineText::after{
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: var(--primaryColor);
+  display: block;
+  margin: auto;
 }

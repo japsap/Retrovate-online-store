@@ -8,7 +8,7 @@ import { frequentlyAskedQuestions, swiperGallery } from "@/constants/Data";
 
 import { ArrowDown, ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Navbar from "@components/Navbar";
+import { Navbar } from "@components/NavbarComponents";
 
 const page = () => {
   const [activeIndex, setActiveIndex] = useState(null);
