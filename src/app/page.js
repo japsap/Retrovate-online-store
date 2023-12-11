@@ -9,6 +9,7 @@ import { frequentlyAskedQuestions, swiperGallery } from "@/constants/Data";
 import { ArrowDown, ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navbar } from "@components/NavbarComponents";
+import IndexPageCard from "@components/cards/IndexPageCard";
 
 const page = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -29,22 +30,27 @@ const page = () => {
 
           <div className="z-[-1] hidden lg:flex">
             <img
+             alt="header image"
               className="absolute top-32 right-10 w-[300px] h-auto rounded-lg"
               src=" https://images.pexels.com/photos/6636258/pexels-photo-6636258.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
             <img
+              alt="header image"
               className="absolute top-32 left-9 w-[300px] h-auto rounded-lg"
               src="https://images.pexels.com/photos/1125137/pexels-photo-1125137.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
             <img
+             alt="header image"
               className="absolute hidden top-[21.5%] left-[65%] w-[150px] 2xl:flex h-auto rounded-lg"
               src="https://images.pexels.com/photos/4050318/pexels-photo-4050318.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
             <img
+             alt="header image"
               className="absolute top-[15%] left-[40%] w-[250px] h-auto rounded-lg"
               src="https://images.pexels.com/photos/4846436/pexels-photo-4846436.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
             <img
+             alt="header image"
               className="absolute w-[300px] h-auto rounded-lg"
               src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
@@ -91,15 +97,7 @@ const page = () => {
         >
           {swiperGallery.map((slide, id) => (
             <SwiperSlide key={id}>
-              <div className="relative">
-                <img
-                  className="w-full lg:w-[300px] h-[200px] object-fill rounded-lg brightness-[0.65]"
-                  src={slide.img}
-                />
-                <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">
-                  {slide.name}
-                </h1>
-              </div>
+              <IndexPageCard {...slide}/>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -138,7 +136,7 @@ const page = () => {
       <footer className="w-full bg-black mt-[100px]">
         <div className="p-10 flex flex-col lg:flex-row items-baseline justify-around">
           <div className="column gap-3 max-w-[350px]">
-            <Image src="/images/logo.png" width={60} height={60}/>
+            <Image src="/images/logo.png" width={60} height={60} alt="logo image"/>
             <h1 className="text-2xl font-bold text-white">Retrovate</h1>
             <p className="text-stone-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, illum.</p>
           </div>

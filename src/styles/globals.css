@@ -111,10 +111,10 @@ h1,h2,h3,span{
  @apply bg-black text-white w-full lg:w-max border-none p-2 px-5 rounded-md text-sm
 }
 
-
-
+.animation{
+  @apply transition ease-in-out duration-500
+}
 /* texts */
-
 
 .big-heading{
   @apply text-3xl lg:text-7xl
@@ -135,4 +135,54 @@ h1,h2,h3,span{
   background: var(--primaryColor);
   display: block;
   margin: auto;
+}
+
+.navbar-links {
+  color: white;
+  transition: 0.4s;
+  position: relative;
+}
+
+.navbar-links li::after {
+  content: '';
+  position: absolute;
+  background: var(--primaryColor);
+  height: 2px;
+  width: 0%;
+  margin-top: 30px;
+  display: block;
+  transition: .4s;
+}
+
+.navbar-links li.actives::after {
+  content: '';
+  position: absolute;
+  background: var(--primaryColor);
+  height: 2px;
+  width: 10%;
+  margin-top: 30px;
+  display: block;
+  transition: .4s;
+}
+.navbar-links li:hover::after{
+  width: 10%;
+}
+.navbar-logo{
+  color: white;
+  transition: 0.4s;
+}
+
+
+::-webkit-scrollbar{
+width: 3px;
+background-color: #dbdbdb;
+color: blue;
+}
+::-webkit-scrollbar-thumb{
+  color: gray;
+  width: 2px;
+}
+
+::-webkit-scrollbar-track{
+  width: 2px;
 }

@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-import { Info } from "lucide-react";
+import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import { sofaSwiper } from "@constants/Data";
 import { ProductsSwiper } from "./fixedComponents";
 
 import Image from "next/image";
 
 const SearchSectionComponent = () => {
+
+  const [ swiperRef, setSwiperRef ] = useState()
+
+  const handlePrev = useCallback(() => {
+    swiperRef?.slidePrev()
+  }, [swiperRef])
+
+  const handleNext = useCallback(() => {
+    swiperRef?.slideNext()
+  }, [swiperRef])
+
+
   return (
-    <div className="flex flex-col w-full gap-3">
+    <div className="max-w-[1400px] mx-auto flex flex-col w-full gap-3 my-5 px-5">
       {/* search for */}
       <div className="flex flex-col md:flex-row justify-between gap-3 md:items-center ">
         <div className="flex items-center gap-1">
@@ -30,6 +42,7 @@ const SearchSectionComponent = () => {
           width={35}
           height={35}
           className="opacity-[0.5]"
+          alt="icon image"
         />
         <div className="column">
           <h1 className="text-lg text-stone-500">Welcome!</h1>
@@ -41,15 +54,23 @@ const SearchSectionComponent = () => {
       {/* sofias icon*/}
 
       {/* sofas swiper */}
-      <div className="flex flex-col 2xl:flex-row  justify-between items-center min-h-[30vh] w-full mt-5">
+      <div className="flex flex-col 2xl:flex-row justify-between items-center min-h-[30vh] w-full mt-5">
         <div className="column gap-2 w-full">
-          <h1 className="text-4xl font-bold text-black">
-            You Might <br className="hidden md:flex" />
-            Like
+          <h1 className="text-5xl leading-tight font-bold text-black">
+            Trending <br className="hidden md:flex" />
+            Items
           </h1>
-          <p className="text-stone-400">1 Of {sofaSwiper.length}</p>
+          <p className="text-stone-400 text-sm md:max-w-[200px]">Chic furniture array for a stylish, cozy, and functional space.</p>
+          <div className="hidden 2xl:flex items-center gap-3 mt-3">
+            <div className="border-b-2 border-primaryColor border-t-2 border-r-2 rounded-full p-2 cursor-pointer" onClick={handlePrev}>
+              <ArrowLeft className=""/>
+            </div>
+            <div className="border-b-2 border-primaryColor border-t-2 border-l-2 rounded-full p-2 cursor-pointer" onClick={handleNext}>
+              <ArrowRight/>
+            </div>
+          </div>
         </div>
-        <ProductsSwiper />
+        <ProductsSwiper setSwiperRef={setSwiperRef}/>
       </div>
       {/* sofas swiper */}
     </div>

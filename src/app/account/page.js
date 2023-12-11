@@ -57,9 +57,9 @@ const page = () => {
   function onSubmitRegister(e) {
     e.preventDefault()
   }
+  
   function onSubmitLogin(e) {
     e.preventDefault()
-    console.log('first')
   }
 
   return (
@@ -88,7 +88,7 @@ const page = () => {
               Object.values(providers).map((provider) => {
                 return (
                   <button
-                    onClick={() => signIn(provider.id, { callbackUrl: '/items' })}
+                    onClick={() => signIn(provider.id, { callbackUrl: '/catalog' })}
                     key={provider.id}
                     className="flex-center gap-3 text-black border-2 border-black p-2 w-full rounded-lg "
                   >

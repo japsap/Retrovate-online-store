@@ -17,7 +17,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'login-image': "url('/images/bg.png')"
+        'login-image': "url('/images/bg.png')",
+        'login-header' : "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/loginHeader.jpg')"
       },
       colors: {
         primaryColor: "var(--primaryColor)",

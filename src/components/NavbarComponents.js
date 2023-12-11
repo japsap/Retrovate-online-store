@@ -1,20 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { Logo } from "./fixedComponents";
 import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 
-import { Search, ShoppingCart } from "lucide-react";
+import { AlignJustify, Search, ShoppingBag, ShoppingCart } from "lucide-react";
+
+import { signOut  } from "next-auth/react";
 
 export const Navbar = () => {
   return (
     <div className="sticky w-full top-0 bg-white z-[9]">
-      <div className="flex-between max-w-7xl mx-auto p-5">
+      <div className="flex items-center justify-center max-w-7xl mx-auto p-5">
         <Logo />
 
-        <ul className="hidden lg:flex items-center gap-3 list-none group">
+        <ul className="hidden lg:flex justify-center items-center gap-3 list-none group">
           {mainPageNavbar.map((link, id) => (
-            <li className="group-hover:text-gray-200" key={id}>
+            <li className="group-hover:text-gray-200 actives" key={id}>
               <a
                 className="ease-out duration-300 hover:text-black"
                 href={link.path}
@@ -41,37 +43,59 @@ export const Navbar = () => {
   );
 };
 
-export const LoggedNavbar = () => {
+export const LoggedNavbar = ({ bgColor }) => {
+  const linksRef = useRef();
+  const logoTextRef = useRef();
+
+  window.onscroll = function () {
+    navbarScrollFunction();
+  };
+
+  function navbarScrollFunction() {
+    // if (
+    //   document.body.scrollTop > 650 ||
+    //   document.documentElement.scrollTop > 650
+    // ) {
+    //   linksRef.current.style.color = "black";
+    //   logoTextRef.current.style.color = "black";
+    // } else {
+    //   linksRef.current.style.color = "white";
+    //   logoTextRef.current.style.color = "white";
+    // }
+  }
+
   return (
-    <div className="flex-between gap-5 p-5 px-10 bg-transaprent">
-      <Logo />
-      <ul className="hidden lg:flex items-center gap-10 list-none group">
+    <div className={`${bgColor ?'bg-[#1A1A1A] mt-2 rounded-3xl' : ''} max-w-[105rem] mx-auto top-0 w-full left-1/2 -translate-x-1/2 fixed flex-between p-5  bg-transaprent`}>
+      <Logo logoTextRef={logoTextRef} />
+      <ul
+        className="hidden lg:flex gap-10 list-none group navbar-links"
+        ref={linksRef}
+      >
         {LoggedNavLinks.map((link, id) => (
-          <li
-            className="group-hover:text-gray-200 cursor-pointer text-lg"
-            key={id}
-          >
-            <a
-              className="ease-out duration-300 hover:text-black"
-              href={link.path}
-            >
-              {link.name}
-            </a>
+          <li className="cursor-pointer text-lg" key={id}>
+            <a href={link.path}>{link.name}</a>
           </li>
         ))}
       </ul>
 
+      {/* <button onClick={( )=>  signOut()}>log out</button> */}
+
       <div className="flex items-center gap-3">
-        <div className="input_container relative">
-          <Search className="absolute left-2 top-1/2 -translate-y-1/2" />
-          <input
-            placeholder="Seach Products"
-            className="box-border p-2 px-12 outline-none rounded-md focus:border focus:border-gray-200 w-full"
-          />
-        </div>
+        {/*  */}
         <div className="relative cursor-pointer">
-          <ShoppingCart size={25} />
-          <span className="absolute -bottom-3 z-[-1] -right-4  bg-primaryColor rounded-full h-[23px] w-[23px] text-center text-black">1</span>
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="bg-white rounded-full p-2">
+                <ShoppingBag size={25} className="navbar-icon" />
+              </div>
+              <span className="absolute -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
+                1
+              </span>
+            </div>
+            <div className="flex lg:hidden bg-white rounded-full p-2">
+              <AlignJustify size={25} className="navbar-icon" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
