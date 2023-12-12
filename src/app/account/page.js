@@ -72,7 +72,7 @@ const page = () => {
                 ? form.handleSubmit(onSubmitRegister)
                 : form.handleSubmit(onSubmitLogin)
             }
-            className="space-y-8 w-full  max-w-2xl mx-auto p-10"
+            className="space-y-5 w-full  max-w-2xl mx-auto p-10"
           >
             <div className="flex-start gap-3">
               <Image
@@ -90,7 +90,7 @@ const page = () => {
                   <button
                     onClick={() => signIn(provider.id, { callbackUrl: '/catalog' })}
                     key={provider.id}
-                    className="flex-center gap-3 text-black border-2 border-black p-2 w-full rounded-lg "
+                    className="flex-center gap-3 dark:text-white dark:border-white text-black border-2 border-black p-2 w-full rounded-lg "
                   >
                     <Image
                       src={`/images/${provider.name}.png`}
@@ -104,9 +104,9 @@ const page = () => {
               })}
 
             <div className="flex-center gap-3">
-              <span className="h-[1px] w-full bg-stone-400" />
+              <span className="h-[1px] w-full bg-stone-400 dark:bg-[#262626]" />
               <span className="text-stone-400">OR</span>
-              <span className="h-[1px] w-full bg-stone-400" />
+              <span className="h-[1px] w-full bg-stone-400 dark:bg-[#262626]" />
             </div>
 
             {!toggleForm && (
@@ -117,7 +117,7 @@ const page = () => {
                   <FormItem>
                     <FormLabel className="font-bold">Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Username" {...field} />
+                      <Input placeholder="Username" className="login-input" {...field} />
                     </FormControl>
                     <FormDescription>
                       This is your public display name.
@@ -135,7 +135,7 @@ const page = () => {
                 <FormItem>
                   <FormLabel className="font-bold">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email" {...field} />
+                    <Input placeholder="Email" className="login-input" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -148,7 +148,7 @@ const page = () => {
                 <FormItem>
                   <FormLabel className="font-bold">Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Password" {...field} />
+                    <Input placeholder="Password" className="login-input" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -163,7 +163,7 @@ const page = () => {
                 Forgot Password?
               </a>
             </div>
-            <Button type="submit" className="w-full bg-black hover:bg-black/80">
+            <Button type="submit" className="w-full dark:bg-transparent dark:text-white border-2 dark: border-white text-base bg-black hover:bg-black/80">
               {toggleForm ? "Login" : "Register"}
             </Button>
 

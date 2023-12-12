@@ -3,8 +3,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 const AccountCard = () => {
-
-    const { data: session } = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="column gap-3">

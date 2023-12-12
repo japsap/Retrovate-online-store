@@ -30,11 +30,11 @@ const SearchSectionComponent = () => {
       <div className="flex flex-col md:flex-row justify-between gap-3 md:items-center ">
         <div className="flex items-center gap-1">
           <h1 className="text-xl text-stone-500">Searching for:</h1>
-          <span className="font-bold text-xl underlineText">Sofa</span>
+          <span className="font-bold text-xl underlineText dark:font-light dark:text-2xl">Sofa</span>
         </div>
 
-        <p className="font-bold flex items-center gap-3 text-sm">
-          <Info className="text-stone-400" size={16} />
+        <p className="font-bold flex text-stone-400  dark:text-white dark:font-medium items-center gap-3 text-sm">
+          <Info className="text-stone-400 dark:text-white" size={16} />
           {sofaSwiper.length} items found based on your search
         </p>
       </div>
@@ -46,7 +46,7 @@ const SearchSectionComponent = () => {
           src={"/images/icons/sofa.png"}
           width={35}
           height={35}
-          className="opacity-[0.5]"
+          className="opacity-[0.5] dark:invert"
           alt="icon image"
         />
         <div className="column">
@@ -69,13 +69,13 @@ const SearchSectionComponent = () => {
           </p>
           <div className="hidden 2xl:flex items-center gap-3 mt-3">
             <div
-              className="border-b-2 border-primaryColor border-t-2 border-r-2 rounded-full p-2 cursor-pointer"
+              className="border-b-2 border-primaryColor  border-r-2 rounded-full p-2 cursor-pointer"
               onClick={handlePrev}
             >
               <ArrowLeft className="" />
             </div>
             <div
-              className="border-b-2 border-primaryColor border-t-2 border-l-2 rounded-full p-2 cursor-pointer"
+              className="border-b-2 border-primaryColor border-l-2 rounded-full p-2 cursor-pointer"
               onClick={handleNext}
             >
               <ArrowRight />

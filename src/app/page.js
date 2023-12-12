@@ -3,32 +3,29 @@ import "swiper/css";
 
 import Image from "next/image";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { frequentlyAskedQuestions, swiperGallery } from "@/constants/Data";
 
 import { ArrowDown, ArrowRight, ChevronDown, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navbar } from "@components/NavbarComponents";
 import IndexPageCard from "@components/cards/IndexPageCard";
+import { Accordion } from "@components/ui/accordion";
+import AccordeonCard from "@components/cards/AccordeonCard";
+
 
 const page = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const handleItemClick = (index) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
-  };
-
   return (
-    <div>
+    <div className="dark:bg-[#dark:text-black]">
       <Navbar/>
       <header className="min-h-screen flex-center">
         <div className="column gap-10 -mt-[100px]">
-          <h1 className="text-6xl lg:text-9xl text-center">
+          <h1 className="text-6xl lg:text-9xl text-center z-[100]">
             Timeless elegance <br /> in{" "}
             <span className="font-serif text-primaryColor">every</span> piece
           </h1>
 
-          <div className="z-[-1] hidden lg:flex">
+          <div className="z-[1] hidden lg:flex">
             <img
              alt="header image"
               className="absolute top-32 right-10 w-[300px] h-auto rounded-lg"
@@ -109,54 +106,36 @@ const page = () => {
           <button className="outline-btn">Contact Us</button>
         </div>
 
-        <div className="column gap-10">
+        <Accordion className="column gap-10">
           {frequentlyAskedQuestions.map((questions, id) => (
-            <div
-              className="flex-between cursor-pointer"
-              key={id}
-              onClick={() => handleItemClick(id)}
-            >
-              <div className=" column gap-3">
-                <h1 className="text-xl lg:text-2xl">{questions.question}</h1>
-                {activeIndex === id && <p>{questions.answer}</p>}
-              </div>
-              <div className="">
-                {activeIndex === id ? (
-                  <ChevronDown size={35} />
-                ) : (
-                  <ChevronRight size={35} />
-                )}
-              </div>
-            </div>
+              <AccordeonCard key={id} {...questions}/>
           ))}
-        </div>
+        </Accordion>
       </section>
-
-
-      <footer className="w-full bg-black mt-[100px]">
-        <div className="p-10 flex flex-col lg:flex-row items-baseline justify-around">
+      <footer className="w-full dark:bg-white bg-black mt-[100px]">
+        <div className="p-10 flex flex-col lg:flex-row items-baseline justify-around ">
           <div className="column gap-3 max-w-[350px]">
             <Image src="/images/logo.png" width={60} height={60} alt="logo image"/>
-            <h1 className="text-2xl font-bold text-white">Retrovate</h1>
+            <h1 className="text-2xl font-bold text-white dark:text-black">Retrovate</h1>
             <p className="text-stone-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, illum.</p>
           </div>
-          <div className="column gap-5 text-white">
-            <h1 className="font-semibold text-xl text-white">Pages</h1>
+          <div className="column gap-5 text-white dark:text-black">
+            <h1 className="font-semibold text-xl text-white dark:text-black">Pages</h1>
               <ul>
                 <li>Products</li>
                 <li>Collections</li>
                 <li>About</li>
               </ul>
           </div>
-          <div className="column gap-5 text-white">
-            <h1 className="font-bold text-xl text-white">Company</h1>
+          <div className="column gap-5 text-white dark:text-black">
+            <h1 className="font-bold text-xl text-white dark:text-black">Company</h1>
               <ul>
                 <li>Privacy polcy</li>
                 <li>Terms & Conditions</li>
               </ul>
           </div>
-          <div className="column gap-5 text-white">
-            <h1 className="font-bold text-xl text-white">Social</h1>
+          <div className="column gap-5 text-white dark:text-black">
+            <h1 className="font-bold text-xl text-white dark:text-black">Social</h1>
               <ul>
                 <li>Instagram</li>
                 <li>Facebook</li>

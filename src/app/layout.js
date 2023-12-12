@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "@styles/globals.css";
-import Provider from "@components/Provider";
+
+import NextAuthProvider from "@components/providers/NextAuthProvider";
+import { ThemeProvider } from "@components/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,10 +14,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Provider>
-          <main>{children}</main>
-        </Provider>
+      <body className={`${inter.className} dark:bg-[#121212]`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextAuthProvider>
+            <main>{children}</main>
+          </NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

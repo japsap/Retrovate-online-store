@@ -77,19 +77,23 @@ export const frequentlyAskedQuestions = [
     question: "Can I request custom furniture or modifications?",
     answer:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
-  },
+      id:1
+    },
   {
     id: 2,
     question: "Do you offer international shipping?",
     answer:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
-  },
+      id:2
+    },
   {
     id: 3,
     question: "What is return policy?",
     answer:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
-  },
+    id:3
+    },
+
 ];
 
 
