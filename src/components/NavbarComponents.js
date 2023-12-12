@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Logo } from "./fixedComponents";
 import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 
@@ -18,18 +18,20 @@ export const Navbar = () => {
     mobilenavRef.current?.classList.toggle("active");
   };
 
-  window.onscroll = function(){
-    scrollFunction()
-  }
-
-  const scrollFunction = () => {
-    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-      navbarRef.current.style.backdropFilter = "blur(16px)";
-    } else {
-      navbarRef.current.style.backdropFilter = "blur(0px)";
+  useEffect(() => {
+    window.onscroll = function(){
+      scrollFunction()
     }
-  }
-
+  
+    const scrollFunction = () => {
+      if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+        navbarRef.current.style.backdropFilter = "blur(16px)";
+      } else {
+        navbarRef.current.style.backdropFilter = "blur(0px)";
+      }
+    }
+  }, [])
+ 
   return (
     <div className="fixed w-full top-0 z-[9]" ref={navbarRef}>
       <div className="mobile_navbar" ref={mobilenavRef}>
@@ -86,21 +88,25 @@ export const LoggedNavbar = ({ bgColor }) => {
   const logoRef = useRef();
   const linksRef = useRef();
 
-  window.onscroll = function () {
-    navbarScrollFunction();
-  };
-
-  function navbarScrollFunction() {
-    if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
-      navbarRef.current.style.backdropFilter = "blur(16px)";
-      logoRef.current.style.color = "black";
-      linksRef.current.style.color = "black";
-    } else {
-      navbarRef.current.style.backdropFilter = "blur(0px)";
-      logoRef.current.style.color = "white";
-      linksRef.current.style.color = "white";
+  useEffect(() => {
+    window.onscroll = function () {
+      navbarScrollFunction();
+    };
+  
+    function navbarScrollFunction() {
+      if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
+        navbarRef.current.style.backdropFilter = "blur(16px)";
+        logoRef.current.style.color = "black";
+        linksRef.current.style.color = "black";
+      } else {
+        navbarRef.current.style.backdropFilter = "blur(0px)";
+        logoRef.current.style.color = "white";
+        linksRef.current.style.color = "white";
+      }
     }
-  }
+  },[])
+
+  
 
   return (
     <div className="fixed top-0 w-full z-[1000] navbar" ref={navbarRef}>
