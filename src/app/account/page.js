@@ -47,31 +47,22 @@ const page = () => {
   useEffect(() => {
     const setUpProviderts = async () => {
       const response = await getProviders();
-
       setProviders(response);
     };
 
     setUpProviderts();
   }, []);
 
-  function onSubmitRegister(e) {
-    e.preventDefault()
-  }
-  
-  function onSubmitLogin(e) {
-    e.preventDefault()
-  }
-
   return (
     <div className="flex-between">
       <div className="w-full">
         <Form {...form}>
           <form
-            onSubmit={
-              toggleForm
-                ? form.handleSubmit(onSubmitRegister)
-                : form.handleSubmit(onSubmitLogin)
-            }
+            // onSubmit={
+            //   toggleForm
+            //     ? form.handleSubmit(onSubmitRegister)
+            //     : form.handleSubmit(onSubmitLogin)
+            // }
             className="space-y-5 w-full  max-w-2xl mx-auto p-10"
           >
             <div className="flex-start gap-3">
