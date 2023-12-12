@@ -21,12 +21,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { redirect } from "next/navigation";
 
 export const Logo = ({ logoTextRef }) => {
   return (
     <div
       className="flex-start gap-3 cursor-pointer"
-      onClick={() => (window.location.href = "/")}
+      onClick={() =>  redirect('/')}
     >
       <Image width={50} height={50} src={"/images/logo.png"} alt="Logo Image" />
       <h3 className="navbar-logo hidden md:flex text-xl" ref={logoTextRef}>Retrovate</h3>
