@@ -12,9 +12,18 @@ import { Navbar } from "@components/NavbarComponents";
 import IndexPageCard from "@components/cards/IndexPageCard";
 import { Accordion } from "@components/ui/accordion";
 import AccordeonCard from "@components/cards/AccordeonCard";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 
 const page = () => {
+
+  const { data: session } = useSession()
+
+  if(session?.user !== undefined){
+    redirect('/catalog')
+  }
+
   return (
     <div className="dark:bg-[#dark:text-black]">
       <Navbar/>
