@@ -18,11 +18,11 @@ import { redirect } from "next/navigation";
 
 const page = () => {
 
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
-  if(session?.user !== undefined){
-    redirect('/catalog')
-  }
+  // if(session?.user !== undefined){
+  //   redirect('/catalog')
+  // }
 
   return (
     <div className="dark:bg-[#dark:text-black]">
