@@ -44,7 +44,7 @@ export const Navbar = () => {
           </span>
         </Link>
 
-        <ul className="hidden lg:flex justify-center items-center gap-3 list-none group">
+        <ul className="hidden lg:flex justify-center ml-40 items-center gap-3 list-none group">
           {mainPageNavbar.map((link, id) => (
             <li className="group-hover:text-gray-200 actives" key={id}>
               <a

@@ -177,7 +177,7 @@ const page = () => {
           </form>
         </Form>
       </div>
-      <div className="w-full bg-login-image min-h-screen hidden lg:flex items-center justify-center">
+      <div className="w-full bg-login-image bg-center min-h-screen hidden lg:flex items-center justify-center">
         <div className="column gap-5 text-left max-w-sm">
           <h1 className="text-4xl font-bold text-white">
             Welcome to our online store Retrovert

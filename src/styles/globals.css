@@ -161,7 +161,7 @@ p{
   width: 80%;
   background-color: white;
   height: 100vh;
-  z-index: 999999999;
+  z-index: 999999999999;
   border-right: 1px solid #262626;
   transition: .4s;
 }

@@ -20,7 +20,7 @@ const page = () => {
       <Navbar/>
       <header className="min-h-screen flex-center">
         <div className="column gap-10 -mt-[100px]">
-          <h1 className="text-6xl lg:text-9xl text-center z-[100]">
+          <h1 className="text-6xl lg:text-9xl text-center">
             Timeless elegance <br /> in{" "}
             <span className="font-serif text-primaryColor">every</span> piece
           </h1>
