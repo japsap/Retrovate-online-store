@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useEffect, useState } from "react";
 
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
@@ -5,19 +7,22 @@ import { sofaSwiper } from "@constants/Data";
 import { ProductsSwiper } from "./fixedComponents";
 
 import Image from "next/image";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SearchSectionComponent = () => {
-
-  const [ swiperRef, setSwiperRef ] = useState()
+  const [swiperRef, setSwiperRef] = useState();
 
   const handlePrev = useCallback(() => {
-    swiperRef?.slidePrev()
-  }, [swiperRef])
+    swiperRef?.slidePrev();
+  }, [swiperRef]);
 
   const handleNext = useCallback(() => {
-    swiperRef?.slideNext()
-  }, [swiperRef])
+    swiperRef?.slideNext();
+  }, [swiperRef]);
 
+  
 
   return (
     <div className="max-w-[1400px] mx-auto flex flex-col w-full gap-3 my-5 px-5">
@@ -56,21 +61,28 @@ const SearchSectionComponent = () => {
       {/* sofas swiper */}
       <div className="flex flex-col 2xl:flex-row justify-between items-center min-h-[30vh] w-full mt-5">
         <div className="column gap-2 w-full">
-          <h1 className="text-5xl leading-tight font-bold text-black">
-            Trending <br className="hidden md:flex" />
-            Items
+          <h1 className="text-4xl leading-tight font-bold text-black">
+            Items Based On your search
           </h1>
-          <p className="text-stone-400 text-sm md:max-w-[200px]">Chic furniture array for a stylish, cozy, and functional space.</p>
+          <p className="text-stone-400 text-sm md:max-w-[200px]">
+            Chic furniture array for a stylish, cozy, and functional space.
+          </p>
           <div className="hidden 2xl:flex items-center gap-3 mt-3">
-            <div className="border-b-2 border-primaryColor border-t-2 border-r-2 rounded-full p-2 cursor-pointer" onClick={handlePrev}>
-              <ArrowLeft className=""/>
+            <div
+              className="border-b-2 border-primaryColor border-t-2 border-r-2 rounded-full p-2 cursor-pointer"
+              onClick={handlePrev}
+            >
+              <ArrowLeft className="" />
             </div>
-            <div className="border-b-2 border-primaryColor border-t-2 border-l-2 rounded-full p-2 cursor-pointer" onClick={handleNext}>
-              <ArrowRight/>
+            <div
+              className="border-b-2 border-primaryColor border-t-2 border-l-2 rounded-full p-2 cursor-pointer"
+              onClick={handleNext}
+            >
+              <ArrowRight />
             </div>
           </div>
         </div>
-        <ProductsSwiper setSwiperRef={setSwiperRef}/>
+        <ProductsSwiper setSwiperRef={setSwiperRef} />
       </div>
       {/* sofas swiper */}
     </div>

@@ -6,12 +6,10 @@ import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 
 import { AlignJustify, Search, ShoppingBag, ShoppingCart } from "lucide-react";
 
-import { signOut  } from "next-auth/react";
-
 export const Navbar = () => {
   return (
-    <div className="sticky w-full top-0 bg-white z-[9]">
-      <div className="flex items-center justify-center max-w-7xl mx-auto p-5">
+    <div className="w-full top-0 z-[9]">
+      <div className="flex-between max-w-7xl mx-auto p-5">
         <Logo />
 
         <ul className="hidden lg:flex justify-center items-center gap-3 list-none group">
@@ -47,22 +45,22 @@ export const LoggedNavbar = ({ bgColor }) => {
   const linksRef = useRef();
   const logoTextRef = useRef();
 
-  window.onscroll = function () {
-    navbarScrollFunction();
-  };
+  // window.onscroll = function () {
+  //   navbarScrollFunction();
+  // };
 
-  function navbarScrollFunction() {
-    // if (
-    //   document.body.scrollTop > 650 ||
-    //   document.documentElement.scrollTop > 650
-    // ) {
-    //   linksRef.current.style.color = "black";
-    //   logoTextRef.current.style.color = "black";
-    // } else {
-    //   linksRef.current.style.color = "white";
-    //   logoTextRef.current.style.color = "white";
-    // }
-  }
+  // function navbarScrollFunction() {
+  //   if (
+  //     document.body.scrollTop > 650 ||
+  //     document.documentElement.scrollTop > 650
+  //   ) {
+  //     linksRef.current.style.color = "black";
+  //     logoTextRef.current.style.color = "black";
+  //   } else {
+  //     linksRef.current.style.color = "white";
+  //     logoTextRef.current.style.color = "white";
+  //   }
+  // }
 
   return (
     <div className={`${bgColor ?'bg-[#1A1A1A] mt-2 rounded-3xl' : ''} max-w-[105rem] mx-auto top-0 w-full left-1/2 -translate-x-1/2 fixed flex-between p-5  bg-transaprent`}>

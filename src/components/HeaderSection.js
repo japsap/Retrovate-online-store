@@ -1,8 +1,31 @@
+"use client";
+
 import React from "react";
 
 import { Search } from "lucide-react";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
+
 const HeaderSection = () => {
+  const formSchema = z.object({
+    string: z.string().min(4, {
+      message: "Your search data must be higher than 4 symbols",
+    }),
+  });
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: { string: "" },
+  });
+
+  function onSubmitSearch(e) {
+    e.preventDefault();
+  }
+
   return (
     <div className="bg-login-header bg-cover bg-no-repeat min-h-screen w-full mb-10">
       <div className="w-full bg-stone-400 h-[1px] mt-[90px]"></div>
@@ -10,16 +33,46 @@ const HeaderSection = () => {
         <h1 className="text-white text-5xl lg:text-8xl font-semibold ">
           Make yourself <br /> at home
         </h1>
-        <div className="flex flex-col gap-3 w-full">
-          <div className="input_container relative">
-            <Search size={20} className="absolute left-2 top-1/2 -translate-y-1/2" />
-            <input
-              placeholder="Seach Products"
-              className="p-3 px-12 outline-none rounded-md w-full"
+        <Form className="flex flex-col gap-3 w-full" {...form}>
+          <form
+            className="input_container relative w-full"
+            onSubmit={form.handleSubmit(onSubmitSearch)}
+          >
+            <FormField
+              control={form.control}
+              name="string"
+              render={({ field }) => (
+                <FormItem className=''>
+                  <FormControl className>
+                    <Input
+                      {...field}
+                      placeholder="Search Products"
+                      className="focus:border-none p-3 outline-none rounded-md w-full"
+                    />
+                  </FormControl>
+                  <FormMessage className='absolute top-[100%] left-1/2 w-max -translate-x-1/2 bg-red-600/30 p-2 rounded-md'/>
+                </FormItem>
+              )}
             />
-          </div>
-          <p className="text-sm text-white">You can ask about <a className="text-primaryColor" href="#">products</a>, <a className="text-primaryColor" href="#">Open Hours</a>, whatever you want</p>
-        </div>
+            <button type="submit">
+              <Search
+                size={20}
+                className="absolute right-2 top-[30%] -translate-y-1/2"
+              />
+            </button>
+            <p className="text-sm text-white -mt-[15px]">
+            You can ask about{" "}
+            <a className="text-primaryColor" href="#">
+              products
+            </a>
+            ,{" "}
+            <a className="text-primaryColor" href="#">
+              Open Hours
+            </a>
+            , whatever you want
+          </p>
+          </form>
+        </Form>
       </div>
     </div>
   );
