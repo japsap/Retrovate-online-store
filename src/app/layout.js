@@ -1,8 +1,10 @@
+import { Inter } from "next/font/google";
 import "@styles/globals.css";
 
 import NextAuthProvider from "@components/providers/NextAuthProvider";
 import { ThemeProvider } from "@components/providers/ThemeProvider";
 
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -12,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={` dark:bg-[#121212]`}>
+      <body className={`${inter.className} dark:bg-[#121212]`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
