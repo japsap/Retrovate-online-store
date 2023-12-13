@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { Search } from "lucide-react";
 
@@ -11,19 +11,20 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 
 const HeaderSection = () => {
+
   const formSchema = z.object({
     string: z.string().min(4, {
       message: "Your search data must be higher than 4 symbols",
     }),
   });
 
-  const form = useForm({
+  const form = useForm({  
     resolver: zodResolver(formSchema),
     defaultValues: { string: "" },
   });
 
-  function onSubmitSearch(e) {
-    e.preventDefault();
+  function onSubmitSearch(data) {
+    console.log('search', data);
   }
 
   return (

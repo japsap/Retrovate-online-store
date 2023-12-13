@@ -6,12 +6,20 @@ import SearchSectionComponent from "@components/SearchSectionComponent";
 import HeaderSection from "@components/HeaderSection";
 import AccountCard from "@components/cards/AccountCard";
 import { ModeToggle } from "@components/fixedComponents";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 //https://dribbble.com/shots/23044870-Electronic-Detail-Product details product
 // https://www.behance.net/gallery/52433389/Shopping-made-personal-IKEA-online-experience-concept - main page
 
 
 const page = () => {
+
+  const { data: session } = useSession()
+
+  // if(!session) redirect('/')
+
+
   return (
     <div>
       <LoggedNavbar />

@@ -116,6 +116,9 @@ p{
 .outline-btn{
   @apply bg-transparent dark:text-white dark:border-white text-black border-2 border-black w-max p-2 px-5 rounded-md text-sm dark:font-medium font-bold
 }
+.outline-btn-full{
+  @apply bg-transparent dark:text-white dark:border-white text-black border-2 border-black w-full p-2 px-5 rounded-md text-sm dark:font-medium font-bold
+}
 
 .fill-btn{
  @apply bg-black dark:text-black dark:bg-white font-light text-white w-full lg:w-max border-none p-2 px-5 rounded-md text-sm dark:font-bold
@@ -159,10 +162,8 @@ p{
   position: fixed;
   left: -80%;
   width: 80%;
-  background-color: white;
   height: 100vh;
   z-index: 999999999999;
-  border-right: 1px solid #262626;
   transition: .4s;
 }
 .mobile_navbar.active{

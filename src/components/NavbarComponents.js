@@ -9,41 +9,71 @@ import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 import { AlignJustify, ShoppingBag, ShoppingCart } from "lucide-react";
 
 import { ModeToggle } from "./fixedComponents";
+import { cn } from "@lib/utils";
 
 export const Navbar = () => {
   const mobilenavRef = useRef(null);
-  const navbarRef = useRef()
+  const navbarRef = useRef();
 
   const toggleNavbar = () => {
     mobilenavRef.current?.classList.toggle("active");
   };
 
   useEffect(() => {
-    window.onscroll = function(){
-      scrollFunction()
-    }
-  
+    window.onscroll = function () {
+      scrollFunction();
+    };
+
     const scrollFunction = () => {
-      if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+      if (
+        document.body.scrollTop > 0 ||
+        document.documentElement.scrollTop > 0
+      ) {
         navbarRef.current.style.backdropFilter = "blur(16px)";
       } else {
         navbarRef.current.style.backdropFilter = "blur(0px)";
       }
-    }
-  }, [])
- 
+    };
+  }, []);
+
   return (
     <div className="fixed w-full top-0 z-[9]" ref={navbarRef}>
-      <div className="mobile_navbar" ref={mobilenavRef}>
-        <h1>cickiasdasdasdasdasd</h1>
+      <div
+        className={cn(
+          "mobile_navbar dark:bg-[#121212] bg-white p-5 border-r flex flex-col gap-5 border-r-[#dbdbdb] dark:border-[#262626]",
+        )}
+        ref={mobilenavRef}
+      >
+        <Link
+          href="/"
+          className="text-black dark:text-white flex z-40 font-semibold"
+        >
+          <span>retrovate.</span>
+        </Link>
+        <ul className="flex flex-col gap-3 text-lg">
+          {mainPageNavbar.map((link, id) => (
+            <li className="group-hover:text-gray-200 actives" key={id}>
+              <a
+                className="ease-out duration-300 hover:text-black dark:hover:text-stone-400"
+                href={link.path}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-col gap-3">
+          <button className="fill-btn"><Link href='/account'>Register</Link></button>
+          <button className="flex justify-center outline-btn-full"><a><ShoppingBag/></a></button>
+        </div>
       </div>
 
       <div className="flex-between max-w-7xl mx-auto p-5">
-
-        <Link href="/" className="text-black dark:text-white flex z-40 font-semibold">
-          <span>
-            retrovate.
-          </span>
+        <Link
+          href="/"
+          className="text-black dark:text-white flex z-40 font-semibold"
+        >
+          <span>retrovate.</span>
         </Link>
 
         <ul className="hidden lg:flex justify-center ml-40 items-center gap-3 list-none group">
@@ -65,7 +95,7 @@ export const Navbar = () => {
           </button>
           <div className="relative">
             <button className="outline-btn">
-              <ShoppingCart size={18} />
+              <ShoppingBag size={18} />
             </button>
             <span className="absolute -top-2 -right-2 bg-primaryColor rounded-full px-2 text-center text-white"></span>
           </div>
@@ -92,9 +122,12 @@ export const LoggedNavbar = ({ bgColor }) => {
     window.onscroll = function () {
       navbarScrollFunction();
     };
-  
+
     function navbarScrollFunction() {
-      if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
+      if (
+        document.body.scrollTop > 700 ||
+        document.documentElement.scrollTop > 700
+      ) {
         navbarRef.current.style.backdropFilter = "blur(16px)";
         logoRef.current.style.color = "black";
         linksRef.current.style.color = "black";
@@ -104,9 +137,7 @@ export const LoggedNavbar = ({ bgColor }) => {
         linksRef.current.style.color = "white";
       }
     }
-  },[])
-
-  
+  }, []);
 
   return (
     <div className="fixed top-0 w-full z-[1000] navbar" ref={navbarRef}>
@@ -146,7 +177,7 @@ export const LoggedNavbar = ({ bgColor }) => {
                   1
                 </span>
               </div>
-              <div className="flex lg:hidden bg-white rounded-full p-2">
+              <div className="flex lg:hidden text-black bg-white rounded-full p-2">
                 <AlignJustify size={25} className="navbar-icon" />
               </div>
             </div>
