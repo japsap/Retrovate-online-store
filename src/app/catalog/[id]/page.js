@@ -3,8 +3,10 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='px-10'>
+    <div className=''>
+      <div className='px-5'>
         <LoggedNavbar bgColor={true}/>
+      </div>
     </div>
   )
 }

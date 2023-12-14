@@ -16,8 +16,8 @@ const AccountCard = () => {
       <h1 className="text-lg font-bold">Hello, {session?.user.name}!</h1>
       <p className="text-stone-400 column gap-0">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. In deleniti
-        <span className="text-black font-bold cursor-pointer ">Learn more</span>
       </p>
+      <button className="fill-btn"><span>Learn more</span></button>
     </div>
   );
 };

@@ -1,16 +1,12 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import { sofaSwiper } from "@constants/Data";
-import { ProductsSwiper } from "./fixedComponents";
+import { ProductsSwiper } from "../fixedComponents";
 
 import Image from "next/image";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 const SearchSectionComponent = () => {
   const [swiperRef, setSwiperRef] = useState();
 
@@ -22,10 +18,8 @@ const SearchSectionComponent = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
 
-  
-
   return (
-    <div className="max-w-[1400px] mx-auto flex flex-col w-full gap-3 my-5 px-5">
+    <div className="flex flex-col w-full gap-3 my-5 px-5">
       {/* search for */}
       <div className="flex flex-col md:flex-row justify-between gap-3 md:items-center ">
         <div className="flex items-center gap-1">

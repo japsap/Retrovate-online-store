@@ -152,6 +152,14 @@ p{
   display: block;
   margin: auto;
 }
+.underlineText::after{
+  content: '';
+  width: 15%;
+  height: 2px;
+  background: var(--primaryColor);
+  display: block;
+  margin-left:0 ;
+}
 /* special effetctts */
 
 
@@ -218,3 +226,24 @@ p{
 }
 /* navbar */
 
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  color-scheme: dark;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#1a1a1a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #1a1a1a;
+}

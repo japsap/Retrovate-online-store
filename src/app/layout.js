@@ -3,6 +3,7 @@ import "@styles/globals.css";
 
 import NextAuthProvider from "@components/providers/NextAuthProvider";
 import { ThemeProvider } from "@components/providers/ThemeProvider";
+import { ModeToggle } from "@components/fixedComponents";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,10 @@ export default function RootLayout({ children }) {
         >
           <NextAuthProvider>
             <main>{children}</main>
+
+            <div className="fixed z-[1000000000000000000] right-3 bottom-3">
+              <ModeToggle border={false} />
+            </div>
           </NextAuthProvider>
         </ThemeProvider>
       </body>

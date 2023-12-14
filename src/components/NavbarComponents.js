@@ -3,13 +3,13 @@
 import Link from "next/link";
 
 import React, { useEffect, useRef } from "react";
-import { Logo } from "./fixedComponents";
 import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 
-import { AlignJustify, ShoppingBag, ShoppingCart } from "lucide-react";
+import { AlignJustify, ShoppingBag } from "lucide-react";
 
-import { ModeToggle } from "./fixedComponents";
 import { cn } from "@lib/utils";
+
+import { redirect } from "next/navigation";
 
 export const Navbar = () => {
   const mobilenavRef = useRef(null);
@@ -99,7 +99,7 @@ export const Navbar = () => {
             </button>
             <span className="absolute -top-2 -right-2 bg-primaryColor rounded-full px-2 text-center text-white"></span>
           </div>
-          <ModeToggle border={true} />
+          {/* <ModeToggle border={true} /> */}
         </div>
 
         <div
@@ -140,20 +140,18 @@ export const LoggedNavbar = ({ bgColor }) => {
   }, []);
 
   return (
-    <div className="fixed top-0 w-full z-[1000] navbar" ref={navbarRef}>
+    <div className={`sticky top-0 w-full z-[1000] ${!bgColor ? '-mt-[81px] text-white' : 'text-black'} navbar`} ref={navbarRef}>
       <div
-        className={`${
-          bgColor ? "bg-[#1A1A1A] mt-2 rounded-3xl" : ""
-        } max-w-[105rem] mx-auto top-0 w-full  flex-between p-5  bg-transaprent`}
+        className="max-w-[105rem] mx-auto top-0 w-full  flex-between p-5  bg-transaprent"
       >
         <Link href="/" className="flex z-40 font-semibold">
-          <span className="navbar-logo" ref={logoRef}>
+          <span className={`${bgColor ? '' : 'navbar-logo'}`} ref={logoRef}>
             retrovate.
           </span>
         </Link>
 
         <ul
-          className="hidden lg:flex gap-10 list-none group navbar-links"
+          className={`hidden lg:flex gap-10 list-none group ${bgColor ? "" : "navbar-links"}`}
           ref={linksRef}
         >
           {LoggedNavLinks.map((link, id) => (
@@ -169,14 +167,14 @@ export const LoggedNavbar = ({ bgColor }) => {
           {/*  */}
           <div className="relative cursor-pointer">
             <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="bg-white dark:text-black rounded-full p-2">
+              <Link className="relative" href='/cart'>
+                <div className="bg-white text-black rounded-full p-2">
                   <ShoppingBag size={25} className="navbar-icon" />
                 </div>
                 <span className="absolute -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
                   1
                 </span>
-              </div>
+              </Link>
               <div className="flex lg:hidden text-black bg-white rounded-full p-2">
                 <AlignJustify size={25} className="navbar-icon" />
               </div>
