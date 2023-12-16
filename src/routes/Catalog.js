@@ -4,9 +4,7 @@ import { LoggedNavbar } from "@components/NavbarComponents";
 import SearchSectionComponent from "@components/sections/SearchSectionComponent";
 import HeaderSection from "@components/sections/HeaderSection";
 import AccountCard from "@components/cards/AccountCard";
-import { ModeToggle } from "@components/fixedComponents";
-import ItemsInfoSection from "@components/sections/ItemsInfoSection";
-import ImagesSection from "@components/sections/ImagesSection";
+
 
 const Catalog = () => {
   return (
@@ -18,8 +16,6 @@ const Catalog = () => {
           <HeaderSection />
           <div className="max-w-[1450px] mx-auto px-5 w-full">
             <SearchSectionComponent />
-            <ItemsInfoSection />
-            <ImagesSection/>
           </div>
         </div>
 

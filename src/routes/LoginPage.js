@@ -19,8 +19,12 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
+import AccountController from "@controllers/AccountController";
 
 const LoginPage = () => {
+
+  const { createAccount, loginAccount } = AccountController()
+
   const [providers, setProviders] = useState();
   const [toggleForm, setToggleForm] = useState(false);
 
@@ -53,12 +57,7 @@ const LoginPage = () => {
     setUpProviderts();
   }, []);
 
-  const onSubmitRegister = (e) => {
-    e.preventDefault();
-  };
-  const onSubmitLogin = (e) => {
-    e.preventDefault();
-  };
+
 
   return (
     <div className="flex-between">
@@ -67,8 +66,8 @@ const LoginPage = () => {
           <form
             onSubmit={
               toggleForm
-                ? form.handleSubmit(onSubmitRegister)
-                : form.handleSubmit(onSubmitLogin)
+                ? form.handleSubmit(createAccount)
+                : form.handleSubmit(loginAccount)
             }
             className="space-y-5 w-full  max-w-2xl mx-auto p-10"
           >

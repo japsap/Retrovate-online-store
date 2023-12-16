@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
-import { sofaSwiper } from "@constants/Data";
+// import { sofaSwiper } from "@constants/Data";
 import { ProductsSwiper } from "../fixedComponents";
 
 import Image from "next/image";
 const SearchSectionComponent = () => {
-  const [swiperRef, setSwiperRef] = useState();
+  const [ swiperRef, setSwiperRef ] = useState();
+  const [ catalog, setCatalog ] = useState([])
 
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
@@ -17,6 +18,18 @@ const SearchSectionComponent = () => {
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
   }, [swiperRef]);
+
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      const res = await fetch('/api/catalog')
+      const data = await res.json()
+      setCatalog(data)
+    }
+
+    fetchCards()
+  }, []) 
+
 
   return (
     <div className="flex flex-col w-full gap-3 my-5 px-5">
@@ -29,7 +42,7 @@ const SearchSectionComponent = () => {
 
         <p className="font-bold flex text-stone-400  dark:text-white dark:font-medium items-center gap-3 text-sm">
           <Info className="text-stone-400 dark:text-white" size={16} />
-          {sofaSwiper.length} items found based on your search
+          {catalog.length} items found based on your search
         </p>
       </div>
       {/* search for */}
@@ -76,7 +89,7 @@ const SearchSectionComponent = () => {
             </div>
           </div>
         </div>
-        <ProductsSwiper setSwiperRef={setSwiperRef} />
+        <ProductsSwiper catalog={catalog} setSwiperRef={setSwiperRef} />
       </div>
       {/* sofas swiper */}
     </div>

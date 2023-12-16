@@ -2,11 +2,11 @@ import React from "react";
 
 import { BuyBtn } from "@components/fixedComponents";
 
-const ItemsCard = ({ image, name, desc, price, id }) => {
+const ItemsCard = ({ image, name, desc, price, _id }) => {
   return (
     <a
       className="animation column gap-2 border group dark:border-[#262626] border-stone-200 darkL:b p-3 rounded-lg hover:border-stone-300/10 cursor-pointer"
-      href={`/catalog/${id}`}
+      href={`/catalog/${_id}`}
     >
       <img
         src={image}

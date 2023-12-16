@@ -35,7 +35,7 @@ export const Logo = ({ logoTextRef }) => {
   );
 };
 
-export const ProductsSwiper = ({ setSwiperRef }) => {
+export const ProductsSwiper = ({ setSwiperRef, catalog }) => {
   return (
     <div className="w-full 2xl:w-[1000px]">
       <Swiper
@@ -55,7 +55,7 @@ export const ProductsSwiper = ({ setSwiperRef }) => {
           },
         }}
       >
-        {sofaSwiper.map((s, i) => (
+        {catalog?.map((s, i) => (
           <SwiperSlide key={i}>
             <ItemsCard {...s} id={i} />
           </SwiperSlide>

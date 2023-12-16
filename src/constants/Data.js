@@ -34,7 +34,7 @@ export const LoggedNavLinks = [
     name: "Inspirations",
     // path: "#contact_form",
   },
-]
+];
 
 export const swiperGallery = [
   {
@@ -77,69 +77,21 @@ export const frequentlyAskedQuestions = [
     question: "Can I request custom furniture or modifications?",
     answer:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
-      id:1
-    },
+    id: 1,
+  },
   {
     id: 2,
     question: "Do you offer international shipping?",
     answer:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
-      id:2
-    },
+    id: 2,
+  },
   {
     id: 3,
     question: "What is return policy?",
     answer:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui repudiandae saepe enim beatae eos veniam nesciunt atque rerum esse nostrum.",
-    id:3
-    },
-
+    id: 3,
+  },
 ];
 
-
-export const sofaSwiper = [ 
-  {
-    name:'Sofa Stockholm',
-    image: '/images/sofas/sofa-1.png',
-    desc: 'Great sofa',
-    price: 1400
-  },
-  {
-    name:'Sofa Linanas',
-    image: '/images/sofas/sofa-2.png',
-    desc: 'Great sofa',
-    price: 1450
-  },
-  {
-    name:'Sofa Kikvik',
-    image: '/images/sofas/sofa-3.jpeg',
-    desc: 'Great sofa',
-    price: 1550
-  },
-  {
-    name:'Sofa Visele',
-    image: '/images/sofas/sofa-4.png',
-    desc: 'Great sofa',
-    price: 1900
-  },
-  {
-    name:'Sofa Visele',
-    image: '/images/sofas/sofa-4.png',
-    desc: 'Great sofa',
-    price: 1900
-  },
-  {
-    name:'Sofa Visele',
-    image: '/images/sofas/sofa-4.png',
-    desc: 'Great sofa',
-    price: 1900
-  },
-  {
-    name:'Sofa Visele',
-    image: '/images/sofas/sofa-4.png',
-    desc: 'Great sofa',
-    price: 1900
-  },
-  
-  
-]
