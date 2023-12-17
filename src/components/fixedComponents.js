@@ -35,7 +35,7 @@ export const Logo = ({ logoTextRef }) => {
   );
 };
 
-export const ProductsSwiper = ({ setSwiperRef, catalog }) => {
+export const ProductsSwiper = ({ setSwiperRef, catalog, onClickFunction }) => {
   return (
     <div className="w-full 2xl:w-[1000px]">
       <Swiper
@@ -55,9 +55,9 @@ export const ProductsSwiper = ({ setSwiperRef, catalog }) => {
           },
         }}
       >
-        {catalog?.map((s, i) => (
+        {catalog?.map((swiperItem, i) => (
           <SwiperSlide key={i}>
-            <ItemsCard {...s} id={i} />
+            <ItemsCard swiperItem={swiperItem} id={i} onClickFunction={onClickFunction}/>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -69,7 +69,7 @@ export const BuyBtn = () => {
   return (
     <div className="animation flex items-center group-hover:bg-primaryColor justify-between gap-5 group  w-max rounded-full cursor-pointer mt-2" onClick={() => {}}>
       <span className="animation dark:text-black opacity-0 group-hover:opacity-100 ml-5 texts-sm font-bold">Add to Cart</span>
-      <button className="animation  dark:bg-transparent bg-white border-2 border-primaryColor rounded-full p-2 group-hover:text-black group-hover:rotate-[360deg]">
+      <button className="animation  dark:bg-[#121212] bg-white border-2 border-primaryColor rounded-full p-2  group-hover:rotate-[360deg]">
         <Plus />
       </button>
     </div>

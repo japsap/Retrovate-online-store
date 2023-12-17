@@ -4,18 +4,23 @@ import { LoggedNavbar } from "@components/NavbarComponents";
 import SearchSectionComponent from "@components/sections/SearchSectionComponent";
 import HeaderSection from "@components/sections/HeaderSection";
 import AccountCard from "@components/cards/AccountCard";
+import { useEffect } from "react";
+
 
 
 const Catalog = () => {
+
+
+
   return (
     <div>
       <LoggedNavbar />
-      <div className=" items-start flex gap-20">
+      <div className="items-start flex gap-20">
         {/* left side */}
         <div className="column gap-3 w-full">
           <HeaderSection />
           <div className="max-w-[1450px] mx-auto px-5 w-full">
-            <SearchSectionComponent />
+            <SearchSectionComponent/>
           </div>
         </div>
 

@@ -70,13 +70,13 @@ const page = () => {
             <h1 className="font-bold text-xl">Total</h1>
             <h1 className="font-bold text-xl">$1,017.00</h1>
           </div>
-          <button className="bg-transparent py-3 rounded-lg text-black border-2 border-black font-bold">
+          <button className="py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold">
             Check Out
           </button>
 
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitPromoCode)}>
+            <form className="flex flex-col gap-3" onSubmit={form.handleSubmit(submitPromoCode)}>
                <FormField
               control={form.control}
               name="email"
@@ -94,6 +94,8 @@ const page = () => {
                 </FormItem>
               )}
             />
+
+              <button type='submit' className="w-full py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold">Use promocode</button> 
             </form>
           </Form>
         </div>

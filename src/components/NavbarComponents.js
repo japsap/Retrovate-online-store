@@ -114,19 +114,21 @@ export const Navbar = () => {
 };
 
 export const LoggedNavbar = ({ bgColor }) => {
-  const navbarRef = useRef();
-  const logoRef = useRef();
-  const linksRef = useRef();
+  const navbarRef = useRef(null);
+  const logoRef = useRef(null);
+  const linksRef = useRef(null);
 
   useEffect(() => {
+    let num = bgColor ? 0 : 700
+
     window.onscroll = function () {
       navbarScrollFunction();
     };
 
     function navbarScrollFunction() {
       if (
-        document.body.scrollTop > 700 ||
-        document.documentElement.scrollTop > 700
+        document.body.scrollTop > num ||
+        document.documentElement.scrollTop > num
       ) {
         navbarRef.current.style.backdropFilter = "blur(16px)";
         logoRef.current.style.color = "black";
@@ -140,7 +142,7 @@ export const LoggedNavbar = ({ bgColor }) => {
   }, []);
 
   return (
-    <div className={`sticky top-0 w-full z-[1000] ${!bgColor ? '-mt-[81px] text-white' : 'text-black'} navbar`} ref={navbarRef}>
+    <div className={`sticky top-0 w-full z-[1000] ${!bgColor ? '-mt-[81px] text-white' : 'text-black '} navbar`} ref={navbarRef}>
       <div
         className="max-w-[105rem] mx-auto top-0 w-full  flex-between p-5  bg-transaprent"
       >
@@ -160,9 +162,6 @@ export const LoggedNavbar = ({ bgColor }) => {
             </li>
           ))}
         </ul>
-
-        {/* <button onClick={( )=>  signOut()}>log out</button> */}
-
         <div className="flex items-center gap-3">
           {/*  */}
           <div className="relative cursor-pointer">
@@ -171,7 +170,7 @@ export const LoggedNavbar = ({ bgColor }) => {
                 <div className="bg-white text-black rounded-full p-2">
                   <ShoppingBag size={25} className="navbar-icon" />
                 </div>
-                <span className="absolute -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
+                <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
                   1
                 </span>
               </Link>

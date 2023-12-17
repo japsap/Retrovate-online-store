@@ -5,9 +5,13 @@ const useFetch = (url, brackets) => {
   const [ data, setData ] = useState(brackets)
 
   useEffect(() => {
-    fetch(url)
-        .then(res => res.json())
-        .then(res => setData(res))
+    const fetchData = async () => {
+      const r = await fetch(url)
+      const d = await r.json()
+      setData(d)
+    }
+
+    fetchData()
   }, [])
 
   return [ data, setData ]

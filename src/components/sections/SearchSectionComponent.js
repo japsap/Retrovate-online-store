@@ -1,15 +1,45 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
-// import { sofaSwiper } from "@constants/Data";
-import { ProductsSwiper } from "../fixedComponents";
 
-import Image from "next/image";
+import { ProductsSwiper } from "../fixedComponents";
+import useFetch from "@hooks/useFetch";
+import { set } from "mongoose";
+
+const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
+
 const SearchSectionComponent = () => {
-  const [ swiperRef, setSwiperRef ] = useState();
-  const [ catalog, setCatalog ] = useState([])
+  const [swiperRef, setSwiperRef] = useState();
+  const [items, setItems] = useState(itemsPickedByUser);
+
+  useEffect(() => {
+    sessionStorage.setItem("items", JSON.stringify(items));
+
+    let arrValues = items.map((item) => {
+      return item._id;
+    });
+
+    let isDup = arrValues.some((item, index) => {
+      return arrValues.indexOf(item) != index;
+    });
+
+    let JSONObject = items.map(JSON.stringify)
+    let uniqueSet = new Set(JSONObject)
+    let uniqueArr = Array.from(uniqueSet).map(JSON.parse)
+
+    if(isDup){
+      return setItems(uniqueArr)
+    }
+
+  }, [items]);
+
+
+  const getItemsPickedByUser = (item) => {
+      setItems([...items, item]);
+  };
 
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
@@ -19,17 +49,7 @@ const SearchSectionComponent = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
 
-
-  useEffect(() => {
-    const fetchCards = async () => {
-      const res = await fetch('/api/catalog')
-      const data = await res.json()
-      setCatalog(data)
-    }
-
-    fetchCards()
-  }, []) 
-
+  const [catalog, _] = useFetch("/api/catalog", []);
 
   return (
     <div className="flex flex-col w-full gap-3 my-5 px-5">
@@ -37,7 +57,9 @@ const SearchSectionComponent = () => {
       <div className="flex flex-col md:flex-row justify-between gap-3 md:items-center ">
         <div className="flex items-center gap-1">
           <h1 className="text-xl text-stone-500">Searching for:</h1>
-          <span className="font-bold text-xl underlineText dark:font-light dark:text-2xl">Sofa</span>
+          <span className="font-bold text-xl underlineText dark:font-light dark:text-2xl">
+            Sofa
+          </span>
         </div>
 
         <p className="font-bold flex text-stone-400  dark:text-white dark:font-medium items-center gap-3 text-sm">
@@ -68,7 +90,7 @@ const SearchSectionComponent = () => {
       {/* sofas swiper */}
       <div className="flex flex-col 2xl:flex-row justify-between items-center min-h-[30vh] w-full mt-5">
         <div className="column gap-2 w-full">
-          <h1 className="text-4xl leading-tight font-bold text-black">
+          <h1 className="text-4xl leading-tight font-bold text-black md:max-w-[300px]">
             Items Based On your search
           </h1>
           <p className="text-stone-400 text-sm md:max-w-[200px]">
@@ -76,20 +98,24 @@ const SearchSectionComponent = () => {
           </p>
           <div className="hidden 2xl:flex items-center gap-3 mt-3">
             <div
-              className="border-b-2 border-primaryColor  border-r-2 rounded-full p-2 cursor-pointer"
+              className="border-2 border-primaryColor  rounded-full p-2 cursor-pointer"
               onClick={handlePrev}
             >
               <ArrowLeft className="" />
             </div>
             <div
-              className="border-b-2 border-primaryColor border-l-2 rounded-full p-2 cursor-pointer"
+              className="border-2 border-primaryColor rounded-full p-2 cursor-pointer"
               onClick={handleNext}
             >
               <ArrowRight />
             </div>
           </div>
         </div>
-        <ProductsSwiper catalog={catalog} setSwiperRef={setSwiperRef} />
+        <ProductsSwiper
+          onClickFunction={getItemsPickedByUser}
+          catalog={catalog}
+          setSwiperRef={setSwiperRef}
+        />
       </div>
       {/* sofas swiper */}
     </div>
