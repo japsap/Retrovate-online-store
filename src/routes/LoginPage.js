@@ -57,7 +57,6 @@ const LoginPage = () => {
     setUpProviderts();
   }, []);
 
-
   return (
     <div className="flex-between">
       <div className="w-full">
