@@ -14,7 +14,7 @@ const FooterComponent = () => {
             alt="logo image"
           />
           <h1 className="text-2xl font-bold text-white dark:text-black">
-            Retrovate
+            retrovate.
           </h1>
           <p className="text-stone-400">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, illum.
@@ -52,7 +52,7 @@ const FooterComponent = () => {
         </div>
       </div>
       <div className="gradient-line" />
-      <p className="text-stone-400 py-5 text-left max-w-[350px]">
+      <p className="text-stone-400 py-5 text-center">
         © Retrovate Inc. All right reserved
       </p>
     </footer>

@@ -9,6 +9,8 @@ const page = () => {
 
   const { data: session } = useSession();
 
+
+
   return (
     <>
       {session ? <Catalog/> : <LandingPage/>}

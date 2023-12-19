@@ -26,7 +26,7 @@ const HeaderSection = () => {
   });
 
   function onSubmitSearch(data) {
-    console.log(data)
+    //search
   }
 
   return (

@@ -19,7 +19,7 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
-import AccountController from "@controllers/AccountController";
+import AccountController from "@Context/AccountController";
 
 const LoginPage = () => {
 

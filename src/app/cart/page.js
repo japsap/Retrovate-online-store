@@ -9,6 +9,7 @@ import {
   FormItem,
   FormMessage,
   FormField,
+  FormDescription,
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { HelpCircle } from "lucide-react";
@@ -17,22 +18,16 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { promoCodes } from "@constants/Data";
-import { toast, useToast } from "@components/ui/use-toast";
-
-
-const cartItemFromLocalStorage =
-  JSON.parse(sessionStorage.getItem("cart")) || [];
+import { useToast } from "@components/ui/use-toast";
+import { useContext, useEffect, useState } from "react";
+import CartContext from "@Context/CartContext";
 
 const page = () => {
-  const { toast } = useToast()
+  const { toast } = useToast();
 
-  const cartTotalAmount = cartItemFromLocalStorage.reduce(
-    (acc, data) => acc + data.price * 1,
-    0,
-  );
+  const { cart } = useContext(CartContext);
 
-  let taxesAmount = Number(0.02 * cartTotalAmount)
-
+  const [promocode, setPromocode] = useState(0);
 
   const formSchema = z.object({
     promoCode: z.string().min(4, { message: "Promo code invalid" }),
@@ -45,50 +40,29 @@ const page = () => {
     },
   });
 
-
-
- 
-
-    //----------cart chaning price -----//
-
-    const handleChange = (item, d) => {
-      let ind = -1;
-      cart.forEach((data, index) => {
-        if (data._id === item._id) {
-          ind = index;
-        }
-      });
-  
-      const tempArr = cart;
-      tempArr[ind].quantity += d;
-      if (tempArr[ind].quantity === 0) {
-        tempArr[ind].quantity = 1;
-      }
-  
-      setCart([...tempArr]);
-    };
-    //----------cart chaning price -----//
-
-   
-
   const submitPromoCode = (data) => {
-    if(promoCodes.includes(data.promoCode)){
-      
-
-     toast({
-      variant:'green',
-      title: 'Discount Granted',
-      description: 'You have successfully received a discount!'
-     })
+    if (promoCodes.includes(data.promoCode)) {
+      setPromocode(50);
+      toast({
+        variant: "green",
+        title: "Discount Granted",
+        description: "You have successfully received a discount!",
+      });
     } else {
       toast({
-        variant:'destructive',
-        title: 'Wrong promo code',
-        description: 'QJ pishki'
-       })
+        variant: "destructive",
+        title: "Wrong promo code",
+        description: "QJ pishki",
+      });
     }
   };
 
+  const fullPrice = cart?.cartItems?.reduce(
+    (acc, data) => acc + data.price * 1,
+    0,
+  );
+  const taxes = 0.01 * fullPrice;
+  
   return (
     <div className="px-5 max-w-[105rem] mx-auto flex flex-col gap-10">
       <LoggedNavbar bgColor={true} />
@@ -96,14 +70,12 @@ const page = () => {
         <div className="flex flex-col gap-3 w-full">
           <h1 className="font-bold text-4xl">Your Product List</h1>
           <div className="lg:h-[54vh] flex flex-col gap-3 lg:overflow-y-scroll w-full px-1">
-            {cartItemFromLocalStorage.length === 0 ? (
+            {cart?.cartItems?.length === 0 ? (
               <div className="flex justify-center min-h-[50vh] items-center gap-3">
-               <h1 className="text-2xl font-bold">Empty Cart</h1>
+                <h1 className="text-2xl font-bold">Empty Cart</h1>
               </div>
             ) : (
-              cartItemFromLocalStorage.map((cart) => (
-                <CartItemsCard {...cart} />
-              ))
+              cart?.cartItems?.map((cart) => <CartItemsCard {...cart} />)
             )}
           </div>
         </div>
@@ -112,7 +84,9 @@ const page = () => {
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
               <h1 className="font-bold text-xl">Subtotal Product</h1>
-              <h1 className="font-bold text-xl">${cartTotalAmount.toFixed(2)}</h1>
+              <h1 className="font-bold text-xl">
+                ${fullPrice}
+              </h1>
             </div>
             <div className="flex justify-between">
               <h1 className="font-bold text-xl">Price Delivery</h1>
@@ -120,19 +94,23 @@ const page = () => {
             </div>
             <div className="flex justify-between">
               <h1 className="font-bold text-xl">Taxes</h1>
-              <h1 className="font-bold text-xl">${taxesAmount.toFixed(2)}</h1>
+              <h1 className="font-bold text-xl">${taxes.toFixed(2)}</h1>
             </div>
             <div className="flex justify-between">
               <h1 className="flex items-center gap-3 font-bold text-xl">
                 Total Promo{" "}
                 <HelpCircle className="text-stone-400 cursor-pointer" />
               </h1>
-              <h1 className="font-bold text-xl">$0.00</h1>
+              <h1 className="font-bold text-xl">
+                ${Number(promocode).toFixed(2)}
+              </h1>
             </div>
           </div>
           <div className="flex justify-between items-center">
             <h1 className="font-bold text-xl">Total</h1>
-            <h1 className="font-bold text-xl">${Number(cartTotalAmount + taxesAmount).toFixed(2)}</h1>
+            <h1 className="font-bold text-xl">
+              ${Number(fullPrice + taxes).toFixed(2)}
+            </h1>
           </div>
           <button className="py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold">
             Check Out
@@ -158,6 +136,9 @@ const page = () => {
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription className="text-stone-400">
+                      Hint "promocode".
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

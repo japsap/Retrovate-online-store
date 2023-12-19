@@ -9,14 +9,14 @@ import { ProductsSwiper } from "../fixedComponents";
 import useFetch from "@hooks/useFetch";
 import SpinnerComponent from "@components/SpinnerComponent";
 
-const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
+const itemsPickedByUser = JSON.parse(localStorage.getItem("items")) || [];
 
 const SearchSectionComponent = () => {
   const [swiperRef, setSwiperRef] = useState();
   const [items, setItems] = useState(itemsPickedByUser);
 
   useEffect(() => {
-    sessionStorage.setItem("items", JSON.stringify(items));
+    localStorage.setItem("items", JSON.stringify(items));
 
     let arrValues = items.map((item) => {
       return item._id;
@@ -113,6 +113,7 @@ const SearchSectionComponent = () => {
           <SpinnerComponent />
         ) : (
           <ProductsSwiper
+            isLoading={isLoading}
             onClickFunction={getItemsPickedByUser}
             catalog={catalog}
             setSwiperRef={setSwiperRef}

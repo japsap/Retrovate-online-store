@@ -4,6 +4,7 @@ import NextAuthProvider from "@components/providers/NextAuthProvider";
 import { ThemeProvider } from "@components/providers/ThemeProvider";
 import { ModeToggle } from "@components/fixedComponents";
 import { Toaster } from "@components/ui/toaster";
+import { CartProvider } from "@Context/CartContext";
 
 
 export const metadata = {
@@ -15,21 +16,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`dark:bg-[#121212]`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextAuthProvider>
-            <main>{children}</main>
+        <CartProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextAuthProvider>
+              <main>{children}</main>
 
-            <div className="fixed z-[1000000000000000000] right-3 bottom-3">
-              <ModeToggle border={false} />
-            </div>
-            <Toaster/>
-          </NextAuthProvider>
-        </ThemeProvider>
+              <div className="fixed z-[1000000000000000000] right-3 bottom-3">
+                <ModeToggle border={false} />
+              </div>
+              <Toaster />
+            </NextAuthProvider>
+          </ThemeProvider>
+        </CartProvider>
       </body>
     </html>
   );

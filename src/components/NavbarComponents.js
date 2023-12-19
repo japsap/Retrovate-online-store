@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 
 import { AlignJustify, ShoppingBag } from "lucide-react";
 
 import { cn } from "@lib/utils";
+import CartContext from "@Context/CartContext";
 
-import { redirect } from "next/navigation";
 
 export const Navbar = () => {
   const mobilenavRef = useRef(null);
@@ -114,12 +114,13 @@ export const Navbar = () => {
 };
 
 
-const cartItemFromLocalStorage = JSON.parse(sessionStorage.getItem("cart")) || [];
-
 export const LoggedNavbar = ({ bgColor }) => {
-  const navbarRef = useRef(null);
-  const logoRef = useRef(null);
-  const linksRef = useRef(null);
+
+  const { cart } = useContext(CartContext)
+  
+  const navbarRef = useRef();
+  const logoRef = useRef();
+  const linksRef = useRef();
 
   useEffect(() => {
     let num = bgColor ? 0 : 700
@@ -134,21 +135,12 @@ export const LoggedNavbar = ({ bgColor }) => {
         document.documentElement.scrollTop > num
       ) {
         navbarRef.current.style.backdropFilter = "blur(16px)";
-        logoRef.current.style.color = "black";
-        linksRef.current.style.color = "black";
       } else {
         navbarRef.current.style.backdropFilter = "blur(0px)";
-        logoRef.current.style.color = "white";
-        linksRef.current.style.color = "white";
       }
     }
   }, []);
 
-  const [ cartLength, setCartLength ] = useState(0)
-
-  useEffect(() => {
-    setCartLength(cartItemFromLocalStorage.length)
-  }, [cartItemFromLocalStorage.length])
 
   return (
     <div className={`sticky top-0 w-full z-[1000] ${!bgColor ? '-mt-[81px] text-white' : 'text-black '} navbar`} ref={navbarRef}>
@@ -180,7 +172,7 @@ export const LoggedNavbar = ({ bgColor }) => {
                   <ShoppingBag size={25} className="navbar-icon" />
                 </div>
                 <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
-                  {cartLength}
+                 {cart?.cartItems?.length == 0 ? '0' : cart?.cartItems?.length }
                 </span>
               </Link>
               <div className="flex lg:hidden text-black bg-white rounded-full p-2">

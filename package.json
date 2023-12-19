@@ -27,6 +27,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
+    "react-use-cart": "^1.13.0",
     "serpapi": "^2.0.0",
     "swiper": "^11.0.4",
     "tailwind-merge": "^2.0.0",
