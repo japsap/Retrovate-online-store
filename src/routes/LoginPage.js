@@ -87,7 +87,7 @@ const LoginPage = () => {
                       signIn(provider.id, { callbackUrl: "/" })
                     }
                     key={provider.id}
-                    className="flex-center gap-3 dark:text-white dark:border-white text-black border-2 border-black p-2 w-full rounded-lg "
+                    className="flex-center gap-3 dark:text-white dark:border-white text-black border-2 font-bold dark:font-medium border-black p-2 w-full rounded-lg "
                   >
                     <Image
                       src={`/images/${provider.name}.png`}

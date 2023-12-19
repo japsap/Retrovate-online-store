@@ -3,6 +3,7 @@ import "@styles/globals.css";
 import NextAuthProvider from "@components/providers/NextAuthProvider";
 import { ThemeProvider } from "@components/providers/ThemeProvider";
 import { ModeToggle } from "@components/fixedComponents";
+import { Toaster } from "@components/ui/toaster";
 
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
             <div className="fixed z-[1000000000000000000] right-3 bottom-3">
               <ModeToggle border={false} />
             </div>
+            <Toaster/>
           </NextAuthProvider>
         </ThemeProvider>
       </body>

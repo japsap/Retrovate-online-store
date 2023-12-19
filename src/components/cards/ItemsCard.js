@@ -17,7 +17,7 @@ const ItemsCard = (props) => {
         className="w-[300px] mx-auto h-auto mix-blend-color-burn"
       />
       <h1 className="text-xl font-bold text-black">{swiperItem.name}</h1>
-      <p className="text-stone-400  text-sm uppercase">{swiperItem.desc}</p>
+      <p className="text-stone-400  text-sm">{swiperItem.desc}</p>
       <h1 className="w-max font-bold text-xl text-black underlineText">
         ${swiperItem.price}
       </h1>

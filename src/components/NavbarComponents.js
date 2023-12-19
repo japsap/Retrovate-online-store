@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LoggedNavLinks, mainPageNavbar } from "@/constants/Data";
 
 import { AlignJustify, ShoppingBag } from "lucide-react";
@@ -113,6 +113,9 @@ export const Navbar = () => {
   );
 };
 
+
+const cartItemFromLocalStorage = JSON.parse(sessionStorage.getItem("cart")) || [];
+
 export const LoggedNavbar = ({ bgColor }) => {
   const navbarRef = useRef(null);
   const logoRef = useRef(null);
@@ -140,6 +143,12 @@ export const LoggedNavbar = ({ bgColor }) => {
       }
     }
   }, []);
+
+  const [ cartLength, setCartLength ] = useState(0)
+
+  useEffect(() => {
+    setCartLength(cartItemFromLocalStorage.length)
+  }, [cartItemFromLocalStorage.length])
 
   return (
     <div className={`sticky top-0 w-full z-[1000] ${!bgColor ? '-mt-[81px] text-white' : 'text-black '} navbar`} ref={navbarRef}>
@@ -171,7 +180,7 @@ export const LoggedNavbar = ({ bgColor }) => {
                   <ShoppingBag size={25} className="navbar-icon" />
                 </div>
                 <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
-                  1
+                  {cartLength}
                 </span>
               </Link>
               <div className="flex lg:hidden text-black bg-white rounded-full p-2">

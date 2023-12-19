@@ -5,7 +5,6 @@ import { LoggedNavbar } from "@components/NavbarComponents";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormLabel,
   FormItem,
   FormMessage,
@@ -17,7 +16,24 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { promoCodes } from "@constants/Data";
+import { toast, useToast } from "@components/ui/use-toast";
+
+
+const cartItemFromLocalStorage =
+  JSON.parse(sessionStorage.getItem("cart")) || [];
+
 const page = () => {
+  const { toast } = useToast()
+
+  const cartTotalAmount = cartItemFromLocalStorage.reduce(
+    (acc, data) => acc + data.price * 1,
+    0,
+  );
+
+  let taxesAmount = Number(0.02 * cartTotalAmount)
+
+
   const formSchema = z.object({
     promoCode: z.string().min(4, { message: "Promo code invalid" }),
   });
@@ -29,7 +45,49 @@ const page = () => {
     },
   });
 
-  const submitPromoCode = (data) => {};
+
+
+ 
+
+    //----------cart chaning price -----//
+
+    const handleChange = (item, d) => {
+      let ind = -1;
+      cart.forEach((data, index) => {
+        if (data._id === item._id) {
+          ind = index;
+        }
+      });
+  
+      const tempArr = cart;
+      tempArr[ind].quantity += d;
+      if (tempArr[ind].quantity === 0) {
+        tempArr[ind].quantity = 1;
+      }
+  
+      setCart([...tempArr]);
+    };
+    //----------cart chaning price -----//
+
+   
+
+  const submitPromoCode = (data) => {
+    if(promoCodes.includes(data.promoCode)){
+      
+
+     toast({
+      variant:'green',
+      title: 'Discount Granted',
+      description: 'You have successfully received a discount!'
+     })
+    } else {
+      toast({
+        variant:'destructive',
+        title: 'Wrong promo code',
+        description: 'QJ pishki'
+       })
+    }
+  };
 
   return (
     <div className="px-5 max-w-[105rem] mx-auto flex flex-col gap-10">
@@ -38,9 +96,15 @@ const page = () => {
         <div className="flex flex-col gap-3 w-full">
           <h1 className="font-bold text-4xl">Your Product List</h1>
           <div className="lg:h-[54vh] flex flex-col gap-3 lg:overflow-y-scroll w-full px-1">
-            <CartItemsCard />
-            <CartItemsCard />
-            <CartItemsCard />
+            {cartItemFromLocalStorage.length === 0 ? (
+              <div className="flex justify-center min-h-[50vh] items-center gap-3">
+               <h1 className="text-2xl font-bold">Empty Cart</h1>
+              </div>
+            ) : (
+              cartItemFromLocalStorage.map((cart) => (
+                <CartItemsCard {...cart} />
+              ))
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-10 w-full mb-5">
@@ -48,7 +112,7 @@ const page = () => {
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
               <h1 className="font-bold text-xl">Subtotal Product</h1>
-              <h1 className="font-bold text-xl">$1,017.00</h1>
+              <h1 className="font-bold text-xl">${cartTotalAmount.toFixed(2)}</h1>
             </div>
             <div className="flex justify-between">
               <h1 className="font-bold text-xl">Price Delivery</h1>
@@ -56,46 +120,55 @@ const page = () => {
             </div>
             <div className="flex justify-between">
               <h1 className="font-bold text-xl">Taxes</h1>
-              <h1 className="font-bold text-xl">$5.00</h1>
+              <h1 className="font-bold text-xl">${taxesAmount.toFixed(2)}</h1>
             </div>
             <div className="flex justify-between">
               <h1 className="flex items-center gap-3 font-bold text-xl">
                 Total Promo{" "}
                 <HelpCircle className="text-stone-400 cursor-pointer" />
               </h1>
-              <h1 className="font-bold text-xl">$18.00</h1>
+              <h1 className="font-bold text-xl">$0.00</h1>
             </div>
           </div>
           <div className="flex justify-between items-center">
             <h1 className="font-bold text-xl">Total</h1>
-            <h1 className="font-bold text-xl">$1,017.00</h1>
+            <h1 className="font-bold text-xl">${Number(cartTotalAmount + taxesAmount).toFixed(2)}</h1>
           </div>
           <button className="py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold">
             Check Out
           </button>
 
-
           <Form {...form}>
-            <form className="flex flex-col gap-3" onSubmit={form.handleSubmit(submitPromoCode)}>
-               <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-bold text-xl">PromoCode</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your promo code ..."
-                      className="login-input placeholder:text-stone-400 outline-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <form
+              className="flex flex-col gap-3"
+              onSubmit={form.handleSubmit(submitPromoCode)}
+            >
+              <FormField
+                control={form.control}
+                name="promoCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-xl">
+                      PromoCode
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your promo code ..."
+                        className="login-input placeholder:text-stone-400 outline-none"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <button type='submit' className="w-full py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold">Use promocode</button> 
+              <button
+                type="submit"
+                className="w-full py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold"
+              >
+                Use promocode
+              </button>
             </form>
           </Form>
         </div>

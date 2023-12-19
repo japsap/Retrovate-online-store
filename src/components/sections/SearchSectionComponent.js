@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 
 import { ProductsSwiper } from "../fixedComponents";
 import useFetch from "@hooks/useFetch";
-import { set } from "mongoose";
+import SpinnerComponent from "@components/SpinnerComponent";
 
 const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
 
@@ -26,19 +26,17 @@ const SearchSectionComponent = () => {
       return arrValues.indexOf(item) != index;
     });
 
-    let JSONObject = items.map(JSON.stringify)
-    let uniqueSet = new Set(JSONObject)
-    let uniqueArr = Array.from(uniqueSet).map(JSON.parse)
+    let JSONObject = items.map(JSON.stringify);
+    let uniqueSet = new Set(JSONObject);
+    let uniqueArr = Array.from(uniqueSet).map(JSON.parse);
 
-    if(isDup){
-      return setItems(uniqueArr)
+    if (isDup) {
+      return setItems(uniqueArr);
     }
-
   }, [items]);
 
-
   const getItemsPickedByUser = (item) => {
-      setItems([...items, item]);
+    setItems([...items, item]);
   };
 
   const handlePrev = useCallback(() => {
@@ -49,7 +47,7 @@ const SearchSectionComponent = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
 
-  const [catalog, _] = useFetch("/api/catalog", []);
+  const [catalog, _, isLoading] = useFetch("/api/catalog", []);
 
   return (
     <div className="flex flex-col w-full gap-3 my-5 px-5">
@@ -111,11 +109,15 @@ const SearchSectionComponent = () => {
             </div>
           </div>
         </div>
-        <ProductsSwiper
-          onClickFunction={getItemsPickedByUser}
-          catalog={catalog}
-          setSwiperRef={setSwiperRef}
-        />
+        {isLoading ? (
+          <SpinnerComponent />
+        ) : (
+          <ProductsSwiper
+            onClickFunction={getItemsPickedByUser}
+            catalog={catalog}
+            setSwiperRef={setSwiperRef}
+          />
+        )}
       </div>
       {/* sofas swiper */}
     </div>

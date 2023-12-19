@@ -95,3 +95,6 @@ export const frequentlyAskedQuestions = [
   },
 ];
 
+
+
+export const promoCodes = ['cicki2','negri200','promocode', 'maikataNaPeshoEKurva2005']
