@@ -4,7 +4,6 @@ import * as React from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { sofaSwiper } from "@constants/Data";
 
 import "swiper/css";
 
@@ -21,7 +20,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { redirect } from "next/navigation";
-import { Skeleton } from "./ui/skeleton";
 import SpinnerComponent from "./SpinnerComponent";
 
 export const Logo = ({ logoTextRef }) => {

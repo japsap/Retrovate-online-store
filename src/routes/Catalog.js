@@ -4,14 +4,8 @@ import { LoggedNavbar } from "@components/NavbarComponents";
 import SearchSectionComponent from "@components/sections/SearchSectionComponent";
 import HeaderSection from "@components/sections/HeaderSection";
 import AccountCard from "@components/cards/AccountCard";
-import { useEffect } from "react";
-
-
 
 const Catalog = () => {
-
-
-
   return (
     <div>
       <LoggedNavbar />

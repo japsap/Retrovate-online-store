@@ -1,7 +1,6 @@
 "use client";
 
 import { useToast } from "@components/ui/use-toast";
-import { useRouter } from "next/navigation";
 import { createContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
@@ -11,7 +10,6 @@ export const CartProvider = ({ children }) => {
 
   const { toast } = useToast()
 
-  const router = useRouter();
 
   useEffect(() => {
     setCartToState();
@@ -69,7 +67,7 @@ export const CartProvider = ({ children }) => {
       });
     }
 
-    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
+    let m = localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
   };
 
@@ -77,7 +75,7 @@ export const CartProvider = ({ children }) => {
     const newCartItems = cart?.cartItems?.filter((i) => i.product !== id);
 
     if(window.confirm('Are you sure you want to delete this item?')){
-      localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
+      let m = localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
       setCartToState();
       toast({
         variant: "green",

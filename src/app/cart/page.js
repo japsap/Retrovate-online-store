@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { promoCodes } from "@constants/Data";
 import { useToast } from "@components/ui/use-toast";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import CartContext from "@Context/CartContext";
 
 const page = () => {
