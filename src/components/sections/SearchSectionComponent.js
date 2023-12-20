@@ -9,14 +9,14 @@ import { ProductsSwiper } from "../fixedComponents";
 import useFetch from "@hooks/useFetch";
 import SpinnerComponent from "@components/SpinnerComponent";
 
-const itemsPickedByUser = JSON.parse(localStorage.getItem("items")) || [];
-
 const SearchSectionComponent = () => {
+  const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
+
   const [swiperRef, setSwiperRef] = useState();
   const [items, setItems] = useState(itemsPickedByUser);
 
   useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(items));
+    sessionStorage.setItem("items", JSON.stringify(items));
 
     let arrValues = items.map((item) => {
       return item._id;

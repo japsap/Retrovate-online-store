@@ -16,9 +16,10 @@ import SpinnerComponent from "@components/SpinnerComponent";
 
 import CartContext from "@Context/CartContext";
 
-const itemsPickedByUser = JSON.parse(localStorage.getItem("items")) || [];
-
 const page = () => {
+
+  const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
+
   const { id } = useParams();
   const { addItemToCart } = useContext(CartContext)
 
@@ -34,10 +35,6 @@ const page = () => {
       image,
     });
   };
-
-  console.log(desc)
-
-
   return (
     <div>
       <LoggedNavbar bgColor={true} />
@@ -129,7 +126,7 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3 mt-20">
+        {itemsPickedByUser.length === 0 ? '' :   <div className="flex flex-col gap-3 mt-20">
           <h1 className="text-2xl md:text-6xl font-bold underlineText">
             Your search history
           </h1>
@@ -155,7 +152,8 @@ const page = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </div> }
+      
       </div>
       <FooterComponent />
     </div>
