@@ -106,7 +106,7 @@ export const ModeToggle = ({ border }) => {
           className={` border-2 outline-none ${
             border
               ? "border-black dark:border-white"
-              : "border-none bg-white rounded-full"
+              : "dark:bg-[#262626] border-none rounded-full"
           } `}
           size="icon"
         >
@@ -116,9 +116,7 @@ export const ModeToggle = ({ border }) => {
           />
           <Moon
             size={18}
-            className={`font-bold ${
-              border ? "dark:text-white" : "dark:text-black"
-            } absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100`}
+            className={`font-bold absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100`}
           />
           <span className="sr-only">Toggle theme</span>
         </Button>

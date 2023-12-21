@@ -36,9 +36,12 @@ const handler = nextAuth({
               email: profile.email,
               username: profile.name.replace(" ", "").toLowerCase(),
               image: profile.picture,
+              locale: profile.locale,
+              firstName: profile.given_name,
+              lastName: profile.family_name
             });
           }
-  
+          
           return true
         } catch (error) {
           return false;

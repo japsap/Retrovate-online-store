@@ -13,7 +13,7 @@ import { Input } from "../ui/input";
 const HeaderSection = () => {
 
   const formSchema = z.object({
-    string: z
+    search: z
       .string()
       .min(4, {
         message: "Your search data must be higher than 4 symbols",
@@ -22,11 +22,11 @@ const HeaderSection = () => {
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { string: "" },
+    defaultValues: { search: "" },
   });
 
   function onSubmitSearch(data) {
-    //search
+   
   }
 
   return (
@@ -43,7 +43,7 @@ const HeaderSection = () => {
           >
             <FormField
               control={form.control}
-              name="string"
+              name="search"
               render={({ field }) => (
                 <FormItem className="">
                   <FormControl className>

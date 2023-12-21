@@ -1,3 +1,17 @@
+import {
+  LayoutGrid,
+  ClipboardList,
+  Users,
+  ShoppingCart,
+  CreditCard,
+  Bug,
+  User,
+  ShieldQuestion,
+  Folder,
+  FolderCheck,
+  History
+} from "lucide-react";
+
 export const mainPageNavbar = [
   {
     name: "Home",
@@ -27,11 +41,11 @@ export const LoggedNavLinks = [
     // path: "#about_section",
   },
   {
-    name: "Rooms",
+    // name: "Rooms",
     // path: "#testimonials_section",
   },
   {
-    name: "Inspirations",
+    // name: "Inspirations",
     // path: "#contact_form",
   },
 ];
@@ -95,6 +109,115 @@ export const frequentlyAskedQuestions = [
   },
 ];
 
+export const promoCodes = [
+  "cicki2",
+  "negri200",
+  "promocode",
+  "maikataNaPeshoEKurva2005",
+];
 
+export const dashboardLinks = [
+  {
+    name: "Dashboard",
+    icon: <LayoutGrid />,
+    path: "/admin",
+  },
+  {
+    name: "Orders",
+    icon: <ClipboardList />,
+    path: "/orders",
+  },
+  {
+    name: "Products",
+    icon: <ShoppingCart />,
+    path: "/products",
+  },
+  {
+    name: "Billing",
+    icon: <CreditCard />,
+    path: "/billings",
+  },
+  {
+    name: "Customers",
+    icon: <Users />,
+    path: "/customer",
+  },
+];
 
-export const promoCodes = ['cicki2','negri200','promocode', 'maikataNaPeshoEKurva2005']
+export const accountDashboardLinks = [
+  {
+    name: "User",
+    icon: <User />,
+    path: "",
+  },
+  {
+    name: "Help",
+    icon: <ShieldQuestion />,
+    path: "",
+  },
+  {
+    name: "Report",
+    icon: <Bug />,
+    path: "",
+  },
+];
+
+export const chartCardsData = [
+  {
+    name: "Total Income",
+    total: "$129,230",
+    pData: [2400, 1398, 800, 3908, 7800, 3100, 500],
+    xLabels: [
+      "Page A",
+      "Page B",
+      "Page C",
+      "Page D",
+      "Page E",
+      "Page F",
+      "Page G",
+      "Page G",
+      "Page G",
+      "Page G",
+    ],
+    stroke: '#22c55e',
+    icon: <Folder/>
+  },
+  {
+    name: "Total Sales",
+    total: "2,456",
+    pData : [2400, 1398, 9800, 3908, 4800, 3100, 4300],
+    xLabels: [
+      "Page A",
+      "Page B",
+      "Page C",
+      "Page D",
+      "Page E",
+      "Page F",
+      "Page G",
+      "Page G",
+      "Page G",
+      "Page G",
+    ],
+    stroke: '#22c55e',
+    icon: <History />
+  },
+  {
+    name: "Total Expenses",
+    total: "$5,791",
+    pData : [100400, 1398, 9800, 3908, 4800, 3100, 4300],
+    xLabels: [
+      "Page A",
+      "Page B",
+      "Page C",
+      "Page D",
+      "Page E",
+      "Page F",
+      "Page G",
+      "Page G",
+      "Page G",
+      "Page G",
+    ],
+    stroke: '#dc2626',
+    icon: <FolderCheck />
+  },
+];

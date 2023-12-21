@@ -51,8 +51,8 @@ const page = () => {
     } else {
       toast({
         variant: "destructive",
-        title: "Wrong promo code",
-        description: "QJ pishki",
+        title: "Oops..",
+        description: "Wrong promo code",
       });
     }
   };

@@ -9,7 +9,8 @@ import { AlignJustify, ShoppingBag } from "lucide-react";
 
 import { cn } from "@lib/utils";
 import CartContext from "@Context/CartContext";
-
+import { useSession } from "next-auth/react";
+import useFetch from "@hooks/useFetch";
 
 export const Navbar = () => {
   const mobilenavRef = useRef(null);
@@ -63,8 +64,14 @@ export const Navbar = () => {
           ))}
         </ul>
         <div className="flex flex-col gap-3">
-          <button className="fill-btn"><Link href='/account'>Register</Link></button>
-          <button className="flex justify-center outline-btn-full"><a><ShoppingBag/></a></button>
+          <button className="fill-btn">
+            <Link href="/account">Register</Link>
+          </button>
+          <button className="flex justify-center outline-btn-full">
+            <a>
+              <ShoppingBag />
+            </a>
+          </button>
         </div>
       </div>
 
@@ -113,17 +120,15 @@ export const Navbar = () => {
   );
 };
 
-
 export const LoggedNavbar = ({ bgColor }) => {
+  const { cart } = useContext(CartContext);
 
-  const { cart } = useContext(CartContext)
-  
   const navbarRef = useRef();
   const logoRef = useRef();
   const linksRef = useRef();
 
   useEffect(() => {
-    let num = bgColor ? 0 : 700
+    let num = bgColor ? 0 : 700;
 
     window.onscroll = function () {
       navbarScrollFunction();
@@ -141,20 +146,24 @@ export const LoggedNavbar = ({ bgColor }) => {
     }
   }, []);
 
-
   return (
-    <div className={`sticky top-0 w-full z-[1000] ${!bgColor ? '-mt-[81px] text-white' : 'text-black '} navbar`} ref={navbarRef}>
-      <div
-        className="max-w-[105rem] mx-auto top-0 w-full  flex-between p-5  bg-transaprent"
-      >
+    <div
+      className={`sticky top-0 w-full z-[1000] ${
+        !bgColor ? "-mt-[81px] text-white" : "text-black "
+      } navbar`}
+      ref={navbarRef}
+    >
+      <div className="max-w-[105rem] mx-auto top-0 w-full  flex-between p-5  bg-transaprent">
         <Link href="/" className="flex z-40 font-semibold">
-          <span className={`${bgColor ? '' : 'navbar-logo'}`} ref={logoRef}>
+          <span className={`${bgColor ? "" : "navbar-logo"}`} ref={logoRef}>
             retrovate.
           </span>
         </Link>
 
         <ul
-          className={`hidden lg:flex gap-10 list-none group ${bgColor ? "" : "navbar-links"}`}
+          className={`hidden lg:flex gap-10 list-none group ${
+            bgColor ? "" : "navbar-links"
+          }`}
           ref={linksRef}
         >
           {LoggedNavLinks.map((link, id) => (
@@ -167,12 +176,12 @@ export const LoggedNavbar = ({ bgColor }) => {
           {/*  */}
           <div className="relative cursor-pointer">
             <div className="flex items-center gap-3">
-              <Link className="relative" href='/cart'>
+              <Link className="relative" href="/cart">
                 <div className="bg-white text-black rounded-full p-2">
                   <ShoppingBag size={25} className="navbar-icon" />
                 </div>
                 <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
-                 {cart?.cartItems?.length == 0 ? '0' : cart?.cartItems?.length }
+                  {cart?.cartItems?.length === undefined ? 0 : cart?.cartItems?.length}
                 </span>
               </Link>
               <div className="flex lg:hidden text-black bg-white rounded-full p-2">

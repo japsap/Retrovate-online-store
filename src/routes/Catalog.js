@@ -4,11 +4,21 @@ import { LoggedNavbar } from "@components/NavbarComponents";
 import SearchSectionComponent from "@components/sections/SearchSectionComponent";
 import HeaderSection from "@components/sections/HeaderSection";
 import AccountCard from "@components/cards/AccountCard";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const Catalog = () => {
+
+  const { data: session } = useSession()
+
+  useEffect(() => {
+    localStorage.setItem('userId', JSON.stringify(session?.user?.id).replace(/"/g, ""))
+  }, [])
+  
+
   return (
     <div>
-      <LoggedNavbar />
+      <LoggedNavbar bgColor={false}/>
       <div className="items-start flex gap-20">
         {/* left side */}
         <div className="column gap-3 w-full">
