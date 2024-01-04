@@ -13,11 +13,17 @@ const AccountCard = () => {
         height={60}
         className="rounded-full"
       />
-      <h1 className="text-lg font-bold">Hello, {session?.user.name}!</h1>
-      <p className="text-stone-400 column gap-0">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. In deleniti
-      </p>
-      <button className="fill-btn"><span>Learn more</span></button>
+      <div className="flex flex-col gap-1">
+        <h1 className="text-lg font-bold">
+          Hello, {session?.user.name.split(" ")[0]}!
+        </h1>
+        <p className="text-stone-400 column gap-0">
+          Ready to update your new profile?
+        </p>
+        <button className="fill-btn mt-2">
+          <span> Update Profile</span>
+        </button>
+      </div>
     </div>
   );
 };

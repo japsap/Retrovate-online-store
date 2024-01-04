@@ -23,42 +23,31 @@ import Border from "@components/ui/border";
 import ChartCard from "@components/cards/ChartCard";
 
 import { LineChart } from "@mui/x-charts/LineChart";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import SpinnerComponent from "@components/SpinnerComponent";
+import { getSession, useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+
+
 
 const page = () => {
-  const { pathname } = window.location;
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const userId = localStorage.getItem("userId");
-
-  const [profile, _, isLoading] = useFetch(`/api/profile/${userId}`, []);
-
-  const router = useRouter();
-  const { status: sessionStatus } = useSession();
-  const authorized = sessionStatus === 'authenticated';
-  const unAuthorized = sessionStatus === 'unauthenticated';
-  const loading = sessionStatus === 'loading';
-  
+  const userId = JSON.parse(sessionStorage.getItem("userId")) || []
+ 
+  const [ profile ] = useFetch(`/api/profile/${userId}`, []);
 
   useEffect(() => {
-    if (loading || !router.isReady) return;
+    const isAuthFunc = async () => {
+      const session = await getSession()
 
-    if (sessionStatus === 'unauthenticated') {
-      router.push({
-        pathname: '/',
-      });
+      if(session === null){
+        router.push('/')
+      }
     }
-  }, [loading, unAuthorized, sessionStatus, router]);
+    isAuthFunc()
+  }, [])
 
-
-if (loading) {
-    return (
-      <div className="flex-center min-h-screen">
-        <SpinnerComponent/>
-      </div>
-    );
-}
+  
 
   return (
     <div className="flex items-start justify-between gap-5">
@@ -172,11 +161,11 @@ if (loading) {
 
         <div className="flex flex-col gap-3  border border-[#E4E4E7] dark:border-[#262626] p-3 rounded-lg">
           <div className="flex-between">
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-3">
               <Coins size={30} className="text-stone-400" />
               <h1 className="text-3xl font-semibold">Sales Revenue</h1>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-3">
               <span className="w-7 h-2 rounded-xl bg-green-600" />
               <p className="w-full">Reccuring Revenue</p>
             </div>

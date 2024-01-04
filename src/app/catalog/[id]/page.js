@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 
 import { LoggedNavbar } from "@components/NavbarComponents";
@@ -15,9 +15,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SpinnerComponent from "@components/SpinnerComponent";
 
 import CartContext from "@Context/CartContext";
+import Link from "next/link";
+import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
+
 
 const page = () => {
-
   const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
 
   const { id } = useParams();
@@ -27,6 +30,22 @@ const page = () => {
 
   const { _id, name, image, desc, images, innerDescription, categorty, price } = data;
 
+
+  useEffect(() => {
+    const isAuthFunc = async () => {
+      const session = await getSession()
+
+      console.log(session);
+
+      if(session === null){
+        window.location.href = '/'
+      }
+    }
+    isAuthFunc()
+  }, [])
+
+  
+
   const addToCartHandler = () => {
     addItemToCart({
       product: _id,
@@ -35,6 +54,9 @@ const page = () => {
       image,
     });
   };
+
+  const { cart } = useContext(CartContext)
+
   return (
     <div>
       <LoggedNavbar bgColor={true} />
@@ -116,8 +138,14 @@ const page = () => {
                 >
                   Add To Cart
                 </button>
-                <button className="border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
-                  <ShoppingBag />
+                <button className="relative border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
+                  <Link href='/cart'>
+                    <ShoppingBag />
+                    <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
+                  {cart?.cartItems?.length === undefined ? 0 : cart?.cartItems?.length}
+                </span>
+                  </Link>
+                  
                 </button>
                 <button className="border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
                   <Heart />

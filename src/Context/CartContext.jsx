@@ -78,6 +78,7 @@ export const CartProvider = ({ children }) => {
       let m = localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
       setCartToState();
       toast({
+          variant: "green",
           title: "Success",
           description: "Successfully removed this item to your cart",
       })

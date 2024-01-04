@@ -9,7 +9,7 @@ import { AlignJustify, ShoppingBag } from "lucide-react";
 
 import { cn } from "@lib/utils";
 import CartContext from "@Context/CartContext";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import useFetch from "@hooks/useFetch";
 
 export const Navbar = () => {
@@ -87,7 +87,7 @@ export const Navbar = () => {
           {mainPageNavbar.map((link, id) => (
             <li className="group-hover:text-gray-200 actives" key={id}>
               <a
-                className="ease-out duration-300 hover:text-black dark:hover:text-stone-400"
+                className="ease-out duration-300 dark:text-white hover:text-black dark:hover:text-stone-400"
                 href={link.path}
               >
                 {link.name}
@@ -155,7 +155,7 @@ export const LoggedNavbar = ({ bgColor }) => {
     >
       <div className="max-w-[105rem] mx-auto top-0 w-full  flex-between p-5  bg-transaprent">
         <Link href="/" className="flex z-40 font-semibold">
-          <span className={`${bgColor ? "" : "navbar-logo"}`} ref={logoRef}>
+          <span className={`${bgColor ? "" : "navbar-logo"} dark:text-white`} ref={logoRef}>
             retrovate.
           </span>
         </Link>
@@ -167,7 +167,7 @@ export const LoggedNavbar = ({ bgColor }) => {
           ref={linksRef}
         >
           {LoggedNavLinks.map((link, id) => (
-            <li className="cursor-pointer text-base" key={id}>
+            <li className="cursor-pointer text-base dark:text-white" key={id}>
               <a href={link.path}>{link.name}</a>
             </li>
           ))}
@@ -188,6 +188,9 @@ export const LoggedNavbar = ({ bgColor }) => {
                 <AlignJustify size={25} className="navbar-icon" />
               </div>
             </div>
+          </div>
+          <div>
+            <button onClick={() => signOut()}>Sign Out</button>
           </div>
         </div>
       </div>

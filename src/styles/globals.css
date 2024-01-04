@@ -183,11 +183,13 @@ p{
 }
 
 .navbar{
+  background-color: transparent;
   border-color: #E5E7EB; 
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms; 
   width: 100%;
+  backdrop-filter: blur(0);
 }
 
 
@@ -229,6 +231,11 @@ p{
   transition: 0.4s;
 }
 /* navbar */
+
+.hide-bg{
+  mix-blend-mode: multiply;
+  filter: contrast(1);
+}
 
 
 /* width */

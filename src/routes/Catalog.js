@@ -12,7 +12,7 @@ const Catalog = () => {
   const { data: session } = useSession()
 
   useEffect(() => {
-    localStorage.setItem('userId', JSON.stringify(session?.user?.id).replace(/"/g, ""))
+    sessionStorage.setItem('userId', JSON.stringify(session?.user?.id))
   }, [])
   
 

@@ -9,7 +9,7 @@ const CartItemsCard = ({ product, name, image, categorty, price  }) => {
   return (
     <div className="relative w-full flex justify-between flex-col lg:flex-row xl:h-[170px] border border-[#E5E7EB] dark:border-[#262626] p-3 rounded-md shadow-sm">
       <div className="flex flex-col xl:flex-row gap-5 w-full">
-        <img className="mx-auto w-[250px] h-auto object-contain" src={image} /> 
+        <img className="mx-auto w-[250px] h-auto object-contain hide-bg" src={image} /> 
         <div className="grid flex-col content-between gap-1 w-full">
           <h1 className="font-bold text-2xl">{name}</h1>
           <div>
@@ -22,7 +22,7 @@ const CartItemsCard = ({ product, name, image, categorty, price  }) => {
         <div onClick={() => deleteItemFromCart(product)} className="absolute lg:static top-3 right-3 w-max bg-red-600/30 p-2 rounded-full cursor-pointer">
             <Trash className="text-red-600"/>
         </div>
-        <span className="text-2xl font-bold mt-5 underlineText">${Number(price).toFixed(2)}</span>
+        <span className="text-xl font-bold mt-5 underlineText">${Number(price).toFixed(2)}</span>
       </div>
     </div>
   );
