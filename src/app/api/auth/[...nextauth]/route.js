@@ -10,6 +10,7 @@ const handler = nextAuth({
       GoogleProvider({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        redirectUri: 'https://retrovate-online-store.vercel.app/api/auth/callback/google',
         authorization: {
           params: {
             prompt: "consent",
@@ -17,6 +18,7 @@ const handler = nextAuth({
             response_type: "code"
           }
         }
+      
       }),
     ],
     callbacks: {
