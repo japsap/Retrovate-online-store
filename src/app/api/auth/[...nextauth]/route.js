@@ -4,21 +4,12 @@ import { User } from '@schemas/User'
 import nextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 
-
-const handler = nextAuth({
+const handler = nextAuth(
+  {
     providers: [
       GoogleProvider({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        redirectUri: 'https://retrovate-online-store.vercel.app/api/auth/callback/google',
-        authorization: {
-          params: {
-            prompt: "consent",
-            access_type: "offline",
-            response_type: "code"
-          }
-        }
-      
       }),
     ],
     callbacks: {
