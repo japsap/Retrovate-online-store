@@ -1,6 +1,6 @@
 "use client";
 
-import React ,{useEffect} from "react";
+import React, {useEffect} from "react";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -23,7 +23,7 @@ import Border from "@components/ui/border";
 import ChartCard from "@components/cards/ChartCard";
 
 import { LineChart } from "@mui/x-charts/LineChart";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
 
@@ -32,7 +32,7 @@ const page = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const userId = JSON.parse(sessionStorage.getItem("userId")) || []
+  const userId = typeof window !== 'undefined' ? JSON.parse(sessionStorage.getItem("userId")) : null
  
   const [ profile ] = useFetch(`/api/profile/${userId}`, []);
 
