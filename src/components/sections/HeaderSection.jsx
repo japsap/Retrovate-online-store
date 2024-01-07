@@ -4,21 +4,8 @@ import React, { useState } from "react";
 
 import { Search } from "lucide-react";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-
 const HeaderSection = () => {
   const [activeSearch, setActiveSearch] = useState([]);
-
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -34,8 +21,8 @@ const HeaderSection = () => {
 
   return (
     <div className="bg-login-header bg-cover bg-no-repeat min-h-screen w-full mb-10">
-      <div className="w-full bg-stone-400 h-[1px] mt-[80px]" id="linezz" />
-      <div className="max-w-2xl mx-auto px-5 md:px-0 flex h-[70vh] flex-col gap-10 items-center justify-center text-center">
+      {/* <div className="w-full bg-stone-400 h-[1px] mt-[80px]" id="linezz" /> */}
+      <div className="max-w-2xl mx-auto px-5 mt-[80px] md:px-0 flex h-[70vh] flex-col gap-10 items-center justify-center text-center">
         <h1 className="text-white text-5xl lg:text-8xl font-semibold ">
           Make yourself <br /> at home
         </h1>

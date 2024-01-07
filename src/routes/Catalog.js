@@ -23,7 +23,7 @@ const Catalog = () => {
         {/* left side */}
         <div className="column gap-3 w-full">
           <HeaderSection />
-          <div className="max-w-[1450px] mx-auto px-5 w-full">
+          <div className="max-w-[1450px] mx-auto w-full">
             <SearchSectionComponent/>
           </div>
         </div>

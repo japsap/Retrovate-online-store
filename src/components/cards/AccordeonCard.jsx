@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
@@ -10,7 +9,7 @@ import {
 const AccordeonCard = ({question, answer, id}) => {
   return (
     <AccordionItem value={`item-${id}`}>
-      <AccordionTrigger className="text-2xl">{question}</AccordionTrigger>
+      <AccordionTrigger className="text-2xl text-left">{question}</AccordionTrigger>
       <AccordionContent className='text-stone-400'>{answer}</AccordionContent>
     </AccordionItem>
   );

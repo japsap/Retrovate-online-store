@@ -12,39 +12,33 @@ import useFetch from "@hooks/useFetch";
 import { CheckCircle, Heart, ShoppingBag, Star } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import SpinnerComponent from "@components/SpinnerComponent";
 
 import CartContext from "@Context/CartContext";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/router";
-
+import { Skeleton } from "@components/ui/skeleton";
 
 const page = () => {
   const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
 
   const { id } = useParams();
-  const { addItemToCart } = useContext(CartContext)
+  const { addItemToCart } = useContext(CartContext);
 
   const [data, _, isLoading] = useFetch(`/api/catalog/${id}`, []);
 
-  const { _id, name, image, desc, images, innerDescription, categorty, price } = data;
-
+  const { _id, name, image, desc, images, innerDescription, categorty, price } =
+    data;
 
   useEffect(() => {
     const isAuthFunc = async () => {
-      const session = await getSession()
+      const session = await getSession();
 
-      console.log(session);
-
-      if(session === null){
-        window.location.href = '/'
+      if (session === null) {
+        window.location.href = "/";
       }
-    }
-    isAuthFunc()
-  }, [])
-
-  
+    };
+    isAuthFunc();
+  }, []);
 
   const addToCartHandler = () => {
     addItemToCart({
@@ -55,7 +49,7 @@ const page = () => {
     });
   };
 
-  const { cart } = useContext(CartContext)
+  const { cart } = useContext(CartContext);
 
   return (
     <div>
@@ -64,13 +58,16 @@ const page = () => {
         <div className="relative flex items-start justify-between  flex-col lg:flex-row gap-20">
           {/* pc version */}
           <div className="hidden lg:grid grid-cols-1 gap-3 lg:grid-cols-2 w-full lg:w-[60%] ">
-            {isLoading ? (
-              <SpinnerComponent />
-            ) : (
-              images?.map((i, index) => (
-                <img key={index} src={i} className="w-full h-auto" />
-              ))
-            )}
+            {isLoading
+              ? [1, 2, 3, 4, 5, 6].map((_, id) => (
+                  <Skeleton
+                    className="bg-stone-300 h-[350px] w-full"
+                    key={id}
+                  />
+                ))
+              : images?.map((i, index) => (
+                  <img key={index} src={i} className="w-full h-auto" />
+                ))}
           </div>
           {/* pc version */}
 
@@ -102,17 +99,50 @@ const page = () => {
           {/* mobile version */}
 
           <div className="sticky top-20 flex flex-col gap-6 w-full lg:w-[40%]">
-            <p>Category: {categorty}</p>
-            <h1 className="text-4xl md:text-5xl font-bold">{name}</h1>
-            <p className="text-stone-400">{desc}</p>
+            <p className="flex gap-3 items-center">
+              Category:{" "}
+              {isLoading ? (
+                <Skeleton className="bg-stone-300 h-4 w-20" />
+              ) : (
+                categorty
+              )}
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold">
+              {isLoading ? (
+                <Skeleton className="bg-stone-300 h-20 w-56" />
+              ) : (
+                name
+              )}
+            </h1>
+            <p className="text-stone-400">
+              {isLoading ? (
+                <Skeleton className="bg-stone-300 h-4 w-20" />
+              ) : (
+                desc
+              )}
+            </p>
             <div className="flex items-center gap-3">
               <Star size={20} />
               <p className="text-[#121212] text-sm font-bold">
                 (4,9) 9,2K Reviews
               </p>
             </div>
-            <p className="leading-1">{innerDescription}</p>
-            <h1 className="text-5xl font-bold">${Number(price).toFixed(2)}</h1>
+            <p className="leading-1">
+              {isLoading ? (
+                <div className="flex flex-col gap-3">
+                  <Skeleton className="bg-stone-300 h-4 w-1/3" />{" "}
+                  <Skeleton className="bg-stone-300 h-4 w-2/3" />{" "}
+                  <Skeleton className="bg-stone-300 h-4 w-full" />{" "}
+                  <Skeleton className="bg-stone-300 h-4 w-full" />{" "}
+                  <Skeleton className="bg-stone-300 h-4 w-full"/> {" "}
+                </div>
+              ) : (
+                innerDescription
+              )}
+            </p>
+            <h1 className="text-5xl font-bold">
+              ${price === "NaN" ? "1000" : Number(price).toFixed(2)}
+            </h1>
             <div className="flex flex-col gap-3 text-sm">
               <div className="flex items-center gap-3">
                 <CheckCircle size={20} className="text-stone-400" />
@@ -139,13 +169,14 @@ const page = () => {
                   Add To Cart
                 </button>
                 <button className="relative border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
-                  <Link href='/cart'>
+                  <Link href="/cart">
                     <ShoppingBag />
                     <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
-                  {cart?.cartItems?.length === undefined ? 0 : cart?.cartItems?.length}
-                </span>
+                      {cart?.cartItems?.length === undefined
+                        ? 0
+                        : cart?.cartItems?.length}
+                    </span>
                   </Link>
-                  
                 </button>
                 <button className="border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
                   <Heart />
@@ -154,34 +185,37 @@ const page = () => {
             </div>
           </div>
         </div>
-        {itemsPickedByUser.length === 0 ? '' :   <div className="flex flex-col gap-3 mt-20">
-          <h1 className="text-2xl md:text-6xl font-bold underlineText">
-            Your search history
-          </h1>
-          <Swiper
-            spaceBetween={50}
-            slidesPerView={3}
-            className="w-full basis-2/3 select-none"
-            breakpoints={{
-              200: {
-                slidesPerView: 1,
-              },
-              400: {
-                slidesPerView: 1,
-              },
-              600: {
-                slidesPerView: 3,
-              },
-            }}
-          >
-            {itemsPickedByUser?.map((swiperItem, i) => (
-              <SwiperSlide>
-                <ItemsCard swiperItem={swiperItem} id={i} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div> }
-      
+        {itemsPickedByUser.length === 0 ? (
+          ""
+        ) : (
+          <div className="flex flex-col gap-3 mt-20">
+            <h1 className="text-2xl md:text-6xl font-bold underlineText">
+              Your search history
+            </h1>
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={3}
+              className="w-full basis-2/3 select-none"
+              breakpoints={{
+                200: {
+                  slidesPerView: 1,
+                },
+                400: {
+                  slidesPerView: 1,
+                },
+                600: {
+                  slidesPerView: 3,
+                },
+              }}
+            >
+              {itemsPickedByUser?.map((swiperItem, i) => (
+                <SwiperSlide>
+                  <ItemsCard swiperItem={swiperItem} id={i} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        )}
       </div>
       <FooterComponent />
     </div>

@@ -18,7 +18,7 @@ const LandingPage = () => {
   return (
     <div className="dark:bg-[#dark:text-black]">
       <Navbar/>
-      <header className="min-h-screen flex-center">
+      <header className="min-h-screen flex-center overflow-hidden">
         <div className="column gap-10 -mt-[100px]">
           <h1 className="text-6xl lg:text-9xl text-center">
             Timeless elegance <br /> in{" "}
@@ -47,6 +47,24 @@ const LandingPage = () => {
               src="https://images.pexels.com/photos/4846436/pexels-photo-4846436.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
             <img
+             alt="header image"
+              className="absolute w-[300px] h-auto rounded-lg"
+              src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            />
+          </div>
+
+          <div className="z-[-1] flex lg:hidden">
+            <img
+              alt="header image"
+                className="absolute top-32 right-10 w-[100px] h-auto rounded-lg"
+                src=" https://images.pexels.com/photos/6636258/pexels-photo-6636258.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              />
+              <img
+             alt="header image"
+              className="absolute top-[15%] left-[10%] w-[250px] h-auto rounded-lg"
+              src="https://images.pexels.com/photos/4846436/pexels-photo-4846436.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            />
+                <img
              alt="header image"
               className="absolute w-[300px] h-auto rounded-lg"
               src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1600"
@@ -106,7 +124,7 @@ const LandingPage = () => {
           <button className="outline-btn">Contact Us</button>
         </div>
 
-        <Accordion className="column gap-10">
+        <Accordion className="text-left column gap-10">
           {frequentlyAskedQuestions.map((questions, id) => (
               <AccordeonCard key={id} {...questions}/>
           ))}

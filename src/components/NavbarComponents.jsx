@@ -189,9 +189,6 @@ export const LoggedNavbar = ({ bgColor }) => {
               </div>
             </div>
           </div>
-          <div>
-            <button onClick={() => signOut()}>Sign Out</button>
-          </div>
         </div>
       </div>
     </div>
