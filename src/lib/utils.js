@@ -1,3 +1,5 @@
+'use client'
+
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -7,13 +9,13 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-export const getItemsSearchedByUser = () => {
-  const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
-
-  const [items, setItems] = useState(itemsPickedByUser);
+export const getItemsSearchedByUser = () => { 
+  // const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
+  
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    sessionStorage.setItem("items", JSON.stringify(items));
+    // const item = JSON.parse(sessionStorage.setItem('items')) || []
 
     let arrValues = items.map((item) => {
       return item._id;

@@ -10,12 +10,8 @@ const useFetch = (url, brackets) => {
     const fetchData = async () => {
       const r = await fetch(url)
       const d = await r.json()
-
-      setTimeout(() => {
         setData(d)
         setIsloading(false)
-      }, 10000);
-        
     }
 
     fetchData()
