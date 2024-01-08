@@ -4,17 +4,8 @@ import { LoggedNavbar } from "@components/NavbarComponents";
 import SearchSectionComponent from "@components/sections/SearchSectionComponent";
 import HeaderSection from "@components/sections/HeaderSection";
 import AccountCard from "@components/cards/AccountCard";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 
-const Catalog = () => {
-
-  const { data: session } = useSession()
-
-  useEffect(() => {
-    sessionStorage.setItem('userId', JSON.stringify(session?.user?.id))
-  }, [])
-  
+const SearchPage = () => {
 
   return (
     <div>
@@ -37,4 +28,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default SearchPage;

@@ -6,7 +6,7 @@ import Image from "next/image";
 import React from "react";
 import { frequentlyAskedQuestions, swiperGallery } from "@/constants/Data";
 
-import { ArrowDown, ArrowRight  } from "lucide-react";
+import { ArrowDown, ArrowRight, Mail  } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navbar } from "@components/NavbarComponents";
 import IndexPageCard from "@components/cards/IndexPageCard";
@@ -56,36 +56,36 @@ const LandingPage = () => {
           <div className="z-[-1] flex lg:hidden">
             <img
               alt="header image"
-                className="absolute top-32 right-10 w-[100px] h-auto rounded-lg"
+                className="absolute top-32 right-10 w-[70px] h-auto rounded-lg"
                 src=" https://images.pexels.com/photos/6636258/pexels-photo-6636258.jpeg?auto=compress&cs=tinysrgb&w=1600"
               />
               <img
              alt="header image"
-              className="absolute top-[15%] left-[10%] w-[250px] h-auto rounded-lg"
+              className="absolute top-[15%] left-[10%] w-[120px] h-auto rounded-lg"
               src="https://images.pexels.com/photos/4846436/pexels-photo-4846436.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
                 <img
              alt="header image"
-              className="absolute w-[300px] h-auto rounded-lg"
+              className="absolute w-[120px] left-10 h-auto rounded-lg"
               src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1600"
             />
           </div>
 
-          <div className="flex-center gap-3 cursor-pointer">
+          <div className="flex-center items-center gap-3 cursor-pointer group">
             <a href="#about_section" className="text-sm">
               Discover
             </a>
-            <ArrowDown size={16} />
+            <ArrowDown size={16} className="group-hover:animate-bounce"/>
           </div>
         </div>
       </header>
 
       <section id="about_section" className="max-width-wrapper">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center justify-between">
-          <h1 className="text-3xl lg:text-7xl">Furniture for every room</h1>
-          <button className="outline-btn flex-between">
+          <h1 className="text-3xl lg:text-7xl font-bold">Furniture for every room</h1>
+          <button className="outline-btn flex items-center gap-3 group">
             Browse all categories
-            <ArrowRight size={16} />
+            <ArrowRight size={16} className="group-hover:animate-bounce-right" />
           </button>
         </div>
         <Swiper
@@ -98,6 +98,9 @@ const LandingPage = () => {
             },
             400: {
               slidesPerView: 1,
+            },
+            500: {
+              slidesPerView: 2,
             },
             600: {
               slidesPerView: 3,
@@ -120,8 +123,11 @@ const LandingPage = () => {
 
       <section className="max-width-wrapper column gap-20 mt-[250px]">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center justify-between">
-          <h1 className="text-3xl lg:text-7xl">Frequently asked questions</h1>
-          <button className="outline-btn">Contact Us</button>
+          <h1 className="text-3xl lg:text-7xl font-bold">Frequently asked questions</h1>
+          <button className="outline-btn flex items-center gap-3 group">
+            <span>Contact Us</span>
+            <Mail size={16} className="group-hover:animate-bounce"/>
+          </button>
         </div>
 
         <Accordion className="text-left column gap-10">

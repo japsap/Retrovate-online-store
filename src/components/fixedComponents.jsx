@@ -2,25 +2,26 @@
 import * as React from "react";
 
 import Image from "next/image";
-
-import { Swiper, SwiperSlide } from "swiper/react";
+import { redirect } from "next/navigation";
 
 import "swiper/css";
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
 
 import { Plus, Moon, Sun } from "lucide-react";
+
 import ItemsCard from "./cards/ItemsCard";
 
 import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { redirect } from "next/navigation";
-import SpinnerComponent from "./SpinnerComponent";
 
 export const Logo = ({ logoTextRef }) => {
   return (
@@ -39,7 +40,6 @@ export const Logo = ({ logoTextRef }) => {
 export const ProductsSwiper = ({
   setSwiperRef,
   catalog,
-  onClickFunction,
   isLoading,
 }) => {
   return (
@@ -61,19 +61,16 @@ export const ProductsSwiper = ({
           },
         }}
       >
-        {isLoading ? (
-          <SpinnerComponent/>
-        ) : (
-          catalog?.map((swiperItem, i) => (
+        {catalog?.map((swiperItem, i) => (
             <SwiperSlide key={i}>
               <ItemsCard
                 swiperItem={swiperItem}
                 id={i}
-                onClickFunction={onClickFunction}
+                isLoading={isLoading}
               />
             </SwiperSlide>
           ))
-        )}
+        }
       </Swiper>
     </div>
   );
@@ -136,5 +133,86 @@ export const ModeToggle = ({ border }) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+};
+
+export const CatalogSwiper = () => {
+  return (
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={10}
+      pagination={true}
+      autoplay={true}
+      modules={[Pagination, Autoplay]}
+      style={{
+        "--swiper-pagination-color": "#FFBA08",
+        "--swiper-pagination-bullet-inactive-color": "#999999",
+        "--swiper-pagination-bullet-inactive-opacity": "1",
+        "--swiper-pagination-bullet-size": "5px",
+        "--swiper-pagination-bullet-horizontal-gap": "6px"
+      }}
+      className="mySwiper w-full"
+    >
+      <SwiperSlide>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between w-full bg-stone-200 dark:bg-[#191919] p-5 mb-5 rounded-lg">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-3xl lg:text-5xl font-bold">Extra 15% Off</h1>
+            <h1 className="text-2xl lg:text-4xl text-stone-400">
+              New Collections of Furniture
+            </h1>
+            <span className="text-primaryColor font-bold text-2xl cursor-pointer">
+              More
+            </span>
+          </div>
+          <div className="relative">
+            <img src="/images/chair.png" className="lg:w-[400px] h-auto" />
+            <span className="h-20 w-20 absolute bottom-1/2 right-0 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-center p-3">
+              BIG
+              <br /> SALE
+            </span>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between w-full bg-stone-200 dark:bg-[#191919] p-5 mb-5 rounded-lg">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-3xl lg:text-5xl font-bold">Extra 15% Off</h1>
+            <h1 className="text-2xl lg:text-4xl text-stone-400">
+              New Collections of Furniture
+            </h1>
+            <span className="text-primaryColor font-bold text-2xl cursor-pointer">
+              More
+            </span>
+          </div>
+          <div className="relative">
+            <img src="/images/chair.png" className="lg:w-[400px] h-auto" />
+            <span className="h-20 w-20 absolute bottom-1/2 right-0 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-center p-3">
+              BIG
+              <br /> SALE
+            </span>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between w-full bg-stone-200 dark:bg-[#191919] p-5 mb-5 rounded-lg">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-3xl lg:text-5xl font-bold">Extra 15% Off</h1>
+            <h1 className="text-2xl lg:text-4xl text-stone-400">
+              New Collections of Furniture
+            </h1>
+            <span className="text-primaryColor font-bold text-2xl cursor-pointer">
+              More
+            </span>
+          </div>
+          <div className="relative">
+            <img src="/images/chair.png" className="lg:w-[400px] h-auto" />
+            <span className="h-20 w-20 absolute bottom-1/2 right-0 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-center p-3">
+              BIG
+              <br /> SALE
+            </span>
+          </div>
+        </div>
+      </SwiperSlide>
+    </Swiper>
   );
 };

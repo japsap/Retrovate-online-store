@@ -1,43 +1,22 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 
+import { getItemsSearchedByUser } from "@lib/utils";
+
 import { ProductsSwiper } from "../fixedComponents";
 import useFetch from "@hooks/useFetch";
 import SpinnerComponent from "@components/SpinnerComponent";
+import { Skeleton } from "@mui/material";
 
 const SearchSectionComponent = () => {
-  const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
 
   const [swiperRef, setSwiperRef] = useState();
-  const [items, setItems] = useState(itemsPickedByUser);
 
-  useEffect(() => {
-    sessionStorage.setItem("items", JSON.stringify(items));
-
-    let arrValues = items.map((item) => {
-      return item._id;
-    });
-
-    let isDup = arrValues.some((item, index) => {
-      return arrValues.indexOf(item) != index;
-    });
-
-    let JSONObject = items.map(JSON.stringify);
-    let uniqueSet = new Set(JSONObject);
-    let uniqueArr = Array.from(uniqueSet).map(JSON.parse);
-
-    if (isDup) {
-      return setItems(uniqueArr);
-    }
-  }, [items]);
-
-  const getItemsPickedByUser = (item) => {
-    setItems([...items, item]);
-  };
+  const { getItemsPickedByUser } = getItemsSearchedByUser()
 
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
@@ -109,8 +88,13 @@ const SearchSectionComponent = () => {
             </div>
           </div>
         </div>
+        <div className="h-auto">
         {isLoading ? (
-          <SpinnerComponent />
+          <>
+            <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[1000px] w-[1000px]"/>
+            <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[1000px] w-[1000px]"/>
+            <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[1000px] w-[1000px]"/>
+          </>
         ) : (
           <ProductsSwiper
             isLoading={isLoading}
@@ -119,6 +103,8 @@ const SearchSectionComponent = () => {
             setSwiperRef={setSwiperRef}
           />
         )}
+        </div>
+        
       </div>
       {/* sofas swiper */}
     </div>

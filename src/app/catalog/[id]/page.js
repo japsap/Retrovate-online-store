@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "next/navigation";
 
 import { LoggedNavbar } from "@components/NavbarComponents";
-import ItemsCard from "@components/cards/ItemsCard";
 import FooterComponent from "@components/FooterComponent";
 
 import useFetch from "@hooks/useFetch";
@@ -17,6 +16,7 @@ import CartContext from "@Context/CartContext";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
 import { Skeleton } from "@components/ui/skeleton";
+import { Carousel, CarouselContent } from "@components/ui/carousel";
 
 const page = () => {
   const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
@@ -61,7 +61,7 @@ const page = () => {
             {isLoading
               ? [1, 2, 3, 4, 5, 6].map((_, id) => (
                   <Skeleton
-                    className="bg-stone-300 h-[350px] w-full"
+                    className="bg-stone-300 dark:bg-[#191919] h-[350px] w-full"
                     key={id}
                   />
                 ))
@@ -102,21 +102,21 @@ const page = () => {
             <p className="flex gap-3 items-center">
               Category:{" "}
               {isLoading ? (
-                <Skeleton className="bg-stone-300 h-4 w-20" />
+                <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-20" />
               ) : (
                 categorty
               )}
             </p>
             <h1 className="text-4xl md:text-5xl font-bold">
               {isLoading ? (
-                <Skeleton className="bg-stone-300 h-20 w-56" />
+                <Skeleton className="bg-stone-300  dark:bg-[#191919] h-20 w-56" />
               ) : (
                 name
               )}
             </h1>
             <p className="text-stone-400">
               {isLoading ? (
-                <Skeleton className="bg-stone-300 h-4 w-20" />
+                <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-20" />
               ) : (
                 desc
               )}
@@ -130,18 +130,18 @@ const page = () => {
             <p className="leading-1">
               {isLoading ? (
                 <div className="flex flex-col gap-3">
-                  <Skeleton className="bg-stone-300 h-4 w-1/3" />{" "}
-                  <Skeleton className="bg-stone-300 h-4 w-2/3" />{" "}
-                  <Skeleton className="bg-stone-300 h-4 w-full" />{" "}
-                  <Skeleton className="bg-stone-300 h-4 w-full" />{" "}
-                  <Skeleton className="bg-stone-300 h-4 w-full"/> {" "}
+                  <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-1/3" />{" "}
+                  <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-2/3" />{" "}
+                  <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-full" />{" "}
+                  <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-full" />{" "}
+                  <Skeleton className="bg-stone-300 dark:bg-[#191919] h-4 w-full" />{" "}
                 </div>
               ) : (
                 innerDescription
               )}
             </p>
             <h1 className="text-5xl font-bold">
-              ${price === "NaN" ? "1000" : Number(price).toFixed(2)}
+              ${isLoading ? "1000.00" : Number(price).toFixed(2)}
             </h1>
             <div className="flex flex-col gap-3 text-sm">
               <div className="flex items-center gap-3">
@@ -192,28 +192,21 @@ const page = () => {
             <h1 className="text-2xl md:text-6xl font-bold underlineText">
               Your search history
             </h1>
-            <Swiper
-              spaceBetween={50}
-              slidesPerView={3}
-              className="w-full basis-2/3 select-none"
-              breakpoints={{
-                200: {
-                  slidesPerView: 1,
-                },
-                400: {
-                  slidesPerView: 1,
-                },
-                600: {
-                  slidesPerView: 3,
-                },
-              }}
-            >
-              {itemsPickedByUser?.map((swiperItem, i) => (
-                <SwiperSlide>
-                  <ItemsCard swiperItem={swiperItem} id={i} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+
+            <Carousel>
+              <CarouselContent>
+                {itemsPickedByUser?.map((carouselitem, i) => (
+                  isLoading ? <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[100px] w-[100px] ml-5"/> :
+                  <div className="ml-5 mt-5 cursor-pointer" key={i} onClick={() => window.location.href = `/catalog/${carouselitem._id}`}>
+                    <img
+                      src={carouselitem.image}
+                      alt="product image"
+                      className="w-[100px] h-auto"
+                    />
+                  </div>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </div>
         )}
       </div>

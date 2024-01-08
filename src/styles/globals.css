@@ -127,6 +127,9 @@ p{
 .fill-btn{
  @apply bg-black dark:text-black dark:bg-white font-light text-white w-full lg:w-max border-none p-2 px-5 rounded-md text-sm dark:font-bold
 }
+.fill-btn-max-width{
+  @apply bg-black dark:text-black dark:bg-white font-light text-white w-max border-none p-2 px-5 rounded-md text-sm dark:font-bold
+ }
 
 .animation{
   @apply transition ease-in-out duration-500
@@ -139,6 +142,10 @@ p{
 
 .login-input{
   @apply bg-transparent dark:placeholder:text-stone-400 dark:border-[#262626] dark:text-stone-400
+}
+
+.skeleton-style{
+  @apply bg-stone-300 dark:bg-[#191919] h-20 w-56
 }
 
 /* special effetctts */
@@ -257,4 +264,21 @@ p{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #1a1a1a;
+}
+
+
+/* animations */
+@keyframes bounce-right {
+  0%, 100% {
+      transform: translateX(-25%);
+      animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+  50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.group:hover .group-hover\:animate-bounce-right {
+  animation: bounce-right 1s infinite;
 }

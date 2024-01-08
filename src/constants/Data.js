@@ -38,7 +38,11 @@ export const LoggedNavLinks = [
   },
   {
     name: "Products",
-    // path: "#about_section",
+    path: "/",
+  },
+  {
+    name: "Search Products",
+    path: "/search"
   },
   {
     // name: "Rooms",
