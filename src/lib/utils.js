@@ -15,7 +15,7 @@ export const getItemsSearchedByUser = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // const item = JSON.parse(sessionStorage.setItem('items')) || []
+    const item = JSON.parse(sessionStorage.setItem('items')) || []
 
     let arrValues = items.map((item) => {
       return item._id;

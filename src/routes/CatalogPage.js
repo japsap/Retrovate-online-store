@@ -26,7 +26,7 @@ const CatalogPage = () => {
   return (
     <div>
       <LoggedNavbar bgColor={true} />
-      <div className="max-w-[95em] mx-auto flex justify-center items-start gap-5 mt-5 px-5">
+      <div className="max-w-[95em] mx-auto flex justify-center items-start gap-5 mt-5 md:px-5">
         <form className="sticky top-24 hidden flex-col gap-5 md:w-1/3 lg:flex">
           {/* first inputs */}
           <div className="flex flex-col gap-1">
