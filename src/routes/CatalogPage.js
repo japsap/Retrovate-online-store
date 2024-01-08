@@ -7,8 +7,12 @@ import useFetch from "@hooks/useFetch";
 import { Skeleton } from "@components/ui/skeleton";
 import { Grip, LayoutGridIcon, ListFilter, Trash } from "lucide-react";
 import React, { useState } from "react";
+import { useToast } from "@components/ui/use-toast";
 
 const CatalogPage = () => {
+
+  const { toast } = useToast()
+
   const [priceRange, setPriceRange] = useState(0);
   const [cols, setCols] = useState(3);
 
@@ -19,6 +23,11 @@ const CatalogPage = () => {
     const filteredProducts = catalog.filter((c) => {
       return c.price > parseInt(priceRange, 10);
     });
+
+    toast({
+      title: "Success!",
+      description: "Successfully filtered the items on your feed!",
+    })
 
     setCatalog(filteredProducts);
   };
@@ -94,7 +103,6 @@ const CatalogPage = () => {
             >
               Filter <ListFilter size={16} />
             </button>
-            {catalog !== c && (
               <button
                 type="button"
                 onClick={() => setCatalog(c)}
@@ -102,7 +110,6 @@ const CatalogPage = () => {
               >
                 Clear Filters <Trash size={16} />
               </button>
-            )}
           </div>
         </form>
 

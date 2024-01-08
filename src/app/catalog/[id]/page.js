@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import { LoggedNavbar } from "@components/NavbarComponents";
@@ -19,12 +19,17 @@ import { Skeleton } from "@components/ui/skeleton";
 import { Carousel, CarouselContent } from "@components/ui/carousel";
 
 const page = () => {
-  const itemsPickedByUser = JSON.parse(sessionStorage.getItem("items")) || [];
-
   const { id } = useParams();
   const { addItemToCart } = useContext(CartContext);
 
   const [data, _, isLoading] = useFetch(`/api/catalog/${id}`, []);
+
+  const [itemsPicketByUser, __] = useState(
+    // sessionStorage.getItem("items")
+    //   ? JSON.parse(sessionStorage.getItem("items"))
+    //   : [],
+    []
+  );
 
   const { _id, name, image, desc, images, innerDescription, categorty, price } =
     data;
@@ -185,7 +190,7 @@ const page = () => {
             </div>
           </div>
         </div>
-        {itemsPickedByUser.length === 0 ? (
+        {itemsPicketByUser.length === 0 ? (
           ""
         ) : (
           <div className="flex flex-col gap-3 mt-20">
@@ -195,16 +200,25 @@ const page = () => {
 
             <Carousel>
               <CarouselContent>
-                {itemsPickedByUser?.map((carouselitem, i) => (
-                  isLoading ? <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[100px] w-[100px] ml-5"/> :
-                  <div className="ml-5 mt-5 cursor-pointer" key={i} onClick={() => window.location.href = `/catalog/${carouselitem._id}`}>
-                    <img
-                      src={carouselitem.image}
-                      alt="product image"
-                      className="w-[100px] h-auto"
-                    />
-                  </div>
-                ))}
+                {itemsPicketByUser?.map((carouselitem, i) =>
+                  isLoading ? (
+                    <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[100px] w-[100px] ml-5" />
+                  ) : (
+                    <div
+                      className="ml-5 mt-5 cursor-pointer"
+                      key={i}
+                      onClick={() =>
+                        (window.location.href = `/catalog/${carouselitem._id}`)
+                      }
+                    >
+                      <img
+                        src={carouselitem.image}
+                        alt="product image"
+                        className="w-[100px] h-auto"
+                      />
+                    </div>
+                  ),
+                )}
               </CarouselContent>
             </Carousel>
           </div>

@@ -9,7 +9,6 @@ import { getItemsSearchedByUser } from "@lib/utils";
 
 import { ProductsSwiper } from "../fixedComponents";
 import useFetch from "@hooks/useFetch";
-import SpinnerComponent from "@components/SpinnerComponent";
 import { Skeleton } from "@mui/material";
 
 const SearchSectionComponent = () => {
