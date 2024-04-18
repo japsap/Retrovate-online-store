@@ -110,7 +110,7 @@ const page = () => {
                 <form className="relative flex-between w-full border-b dark:border-[#262626] border-stone-300 py-3">
                   <Mail className="absolute left-0 text-stone-400" />
                   <input
-                    type="text"
+                    type="email"
                     className="outline-none w-full px-10 bg-transparent placeholder:text-stone-400 text-stone-400"
                     placeholder={isLoading ? "loading..." : user.email}
                   />
@@ -121,7 +121,7 @@ const page = () => {
                 <form className="relative flex-between w-full border-b dark:border-[#262626] border-stone-300 py-3">
                   <Lock className="absolute left-0 text-stone-400" />
                   <input
-                    type="text"
+                    type="password"
                     className="outline-none w-full px-10 bg-transparent placeholder:text-stone-400 text-stone-400"
                     placeholder="•••••••••••••••"
                   />
