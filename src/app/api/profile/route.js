@@ -13,6 +13,6 @@ export const POST = async (req ) => {
         return new Response(JSON.stringify(updatedUser), { status: 201 })
 
     } catch(err){
-        return new Response("Failed to fetch", { status: 500 })
+        return new Response(JSON.stringify(updatedUser), { status: 500 })
     }
 }

@@ -11,6 +11,6 @@ export const GET = async (req, { params }) => {
         return new Response(JSON.stringify(catalogItem), {status: 200})
 
     } catch(err){
-        return new Response("Failed to fetch", { status: 500 })
+        return new Response(JSON.stringify(catalogItem), { status: 500 })
     }
 }

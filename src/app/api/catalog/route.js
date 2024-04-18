@@ -9,7 +9,7 @@ export const GET = async (req, res) => {
         return new Response(JSON.stringify(catalog), { status: 201 })
 
     } catch(err){
-        return new Response("Failed to fetch", { status: 500 })
+        return new Response(JSON.stringify(catalogItem), { status: 500 })
     }
 }
 
