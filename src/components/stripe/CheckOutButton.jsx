@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
+
+import { Button } from '@components/ui/button'
+import CartContext from '@Context/CartContext'
 
 const CheckOutButton = ({ cart }) => {
 
@@ -20,15 +23,16 @@ const CheckOutButton = ({ cart }) => {
             if(res.data.url){
                 window.location.href = res.data.url
                 setIsProcessing(false)
+                localStorage.clear("cart")
             }
         }).catch((err) => console.log(err.message))
 
     }
 
   return (
-    <button className="w-full py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold" onClick={() => handleCheckOut()} disabled={isProcessing}>
+    <Button className="h-[50px]" onClick={() => handleCheckOut()} disabled={isProcessing}>
         {isProcessing ? "Processing ... " : "Pay now"}
-    </button>
+    </Button>
   )
 }
 

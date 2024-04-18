@@ -1,26 +1,19 @@
 import React from "react";
 
-import Image from "next/image";
 
 const FooterComponent = () => {
   return (
-    <footer className="w-full dark:bg-white bg-black mt-[100px]">
-      <div className="p-10 flex flex-col lg:flex-row items-baseline justify-around ">
-        <div className="column gap-3 max-w-[350px]">
-          <Image
-            src="/images/logo.png"
-            width={60}
-            height={60}
-            alt="logo image"
-          />
+    <footer className="w-full dark:bg-white bg-[#18181B] mt-[100px]">
+      <div className="p-10 flex  gap-5 flex-col lg:flex-row items-baseline justify-around ">
+        <div className="flex flex-col gap-3 max-w-[350px]">
           <h1 className="text-2xl font-bold text-white dark:text-black">
-            retrovate.
+            SHOP.
           </h1>
-          <p className="text-stone-400">
+          <p className="text-stone-400 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, illum.
           </p>
         </div>
-        <div className="column gap-5 text-white dark:text-black">
+        <div className="flex flex-col gap-5 text-white dark:text-black">
           <h1 className="font-semibold text-xl text-white dark:text-black">
             Pages
           </h1>
@@ -30,8 +23,8 @@ const FooterComponent = () => {
             <li>About</li>
           </ul>
         </div>
-        <div className="column gap-5 text-white dark:text-black">
-          <h1 className="font-bold text-xl text-white dark:text-black">
+        <div className="flex flex-col gap-5 text-white dark:text-black">
+          <h1 className="font-semibold text-xl text-white dark:text-black">
             Company
           </h1>
           <ul>
@@ -39,8 +32,8 @@ const FooterComponent = () => {
             <li>Terms & Conditions</li>
           </ul>
         </div>
-        <div className="column gap-5 text-white dark:text-black">
-          <h1 className="font-bold text-xl text-white dark:text-black">
+        <div className="flex flex-col gap-5 text-white dark:text-black">
+          <h1 className="font-semibold text-xl text-white dark:text-black">
             Social
           </h1>
           <ul>
@@ -53,7 +46,7 @@ const FooterComponent = () => {
       </div>
       <div className="gradient-line" />
       <p className="text-stone-400 py-5 text-center">
-        © Retrovate Inc. All right reserved
+        © SHOP. Inc. All right reserved
       </p>
     </footer>
   );

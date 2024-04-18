@@ -1,10 +1,7 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect  } from "react";
 import { useParams } from "next/navigation";
-
-import { LoggedNavbar } from "@components/NavbarComponents";
-import FooterComponent from "@components/FooterComponent";
 
 import useFetch from "@hooks/useFetch";
 
@@ -12,11 +9,14 @@ import { CheckCircle, Heart, ShoppingBag, Star } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { getSession } from "next-auth/react";
+
 import CartContext from "@Context/CartContext";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
 import { Skeleton } from "@components/ui/skeleton";
-import { Carousel, CarouselContent } from "@components/ui/carousel";
+
+import { Button } from "@components/ui/button";
+import { isAuthFunc } from "@lib/utils";
 
 const page = () => {
   const { id } = useParams();
@@ -24,25 +24,11 @@ const page = () => {
 
   const [data, _, isLoading] = useFetch(`/api/catalog/${id}`, []);
 
-  const [itemsPicketByUser, __] = useState(
-    // sessionStorage.getItem("items")
-    //   ? JSON.parse(sessionStorage.getItem("items"))
-    //   : [],
-    []
-  );
-
   const { _id, name, image, desc, images, innerDescription, categorty, price } =
     data;
 
   useEffect(() => {
-    const isAuthFunc = async () => {
-      const session = await getSession();
-
-      if (session === null) {
-        window.location.href = "/";
-      }
-    };
-    isAuthFunc();
+    isAuthFunc()
   }, []);
 
   const addToCartHandler = () => {
@@ -58,7 +44,6 @@ const page = () => {
 
   return (
     <div>
-      <LoggedNavbar bgColor={true} />
       <div className="max-w-[105rem] mx-auto px-5">
         <div className="relative flex items-start justify-between  flex-col lg:flex-row gap-20">
           {/* pc version */}
@@ -167,13 +152,13 @@ const page = () => {
                 Free 2 days shipping and 90 days risk free trail
               </p>
               <div className="flex items-center gap-3 w-full">
-                <button
-                  className="w-full py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold"
+                <Button
+                  className='w-full h-[50px]'
                   onClick={addToCartHandler}
                 >
                   Add To Cart
-                </button>
-                <button className="relative border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
+                </Button>
+                <Button variant='outline' className="h-[60px]" >
                   <Link href="/cart">
                     <ShoppingBag />
                     <span className="absolute text-black  -bottom-3 z-[1] -right-2 bg-primaryColor rounded-full h-[23px] w-[23px] text-center navbar-icon">
@@ -182,49 +167,15 @@ const page = () => {
                         : cart?.cartItems?.length}
                     </span>
                   </Link>
-                </button>
-                <button className="border-2 py-3 w-max px-3 rounded-lg dark:border-white border-black">
+                </Button>
+                <Button variant='outline' className="h-[60px]">
                   <Heart />
-                </button>
+                </Button>
               </div>
             </div>
           </div>
         </div>
-        {itemsPicketByUser.length === 0 ? (
-          ""
-        ) : (
-          <div className="flex flex-col gap-3 mt-20">
-            <h1 className="text-2xl md:text-6xl font-bold underlineText">
-              Your search history
-            </h1>
-
-            <Carousel>
-              <CarouselContent>
-                {itemsPicketByUser?.map((carouselitem, i) =>
-                  isLoading ? (
-                    <Skeleton className="bg-stone-300 dark:bg-[#191919] h-[100px] w-[100px] ml-5" />
-                  ) : (
-                    <div
-                      className="ml-5 mt-5 cursor-pointer"
-                      key={i}
-                      onClick={() =>
-                        (window.location.href = `/catalog/${carouselitem._id}`)
-                      }
-                    >
-                      <img
-                        src={carouselitem.image}
-                        alt="product image"
-                        className="w-[100px] h-auto"
-                      />
-                    </div>
-                  ),
-                )}
-              </CarouselContent>
-            </Carousel>
-          </div>
-        )}
       </div>
-      <FooterComponent />
     </div>
   );
 };

@@ -1,8 +1,7 @@
 "use client";
 
 
-import CartItemsCard from "@components/cards/CartItemsCard";
-import { LoggedNavbar } from "@components/NavbarComponents";
+// import CartItemsCard from "@components/cards/CartItemsCard";
 import {
   Form,
   FormControl,
@@ -18,14 +17,17 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { promoCodes } from "@constants/Data";
+import { Button } from "@components/ui/button";
+
 import { useToast } from "@components/ui/use-toast";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "@Context/CartContext";
 
 
 import CheckOutButton from "@components/stripe/CheckOutButton";
-import { getSession } from "next-auth/react";
+import CartItemsCard from "@components/cards/CartItemsCard";
+import { isAuthFunc } from "@lib/utils";
+
 
 const page = () => {
   const { toast } = useToast();
@@ -36,13 +38,6 @@ const page = () => {
   const [promocode, setPromocode] = useState(0);
 
   useEffect(() => {
-    const isAuthFunc = async () => {
-      const session = await getSession()
-
-      if(session === null){
-        window.location.href = '/'
-      }
-    }
     isAuthFunc()
   }, [])
 
@@ -83,14 +78,12 @@ const page = () => {
   
   return (
     <div className="px-5 max-w-[105rem] mx-auto flex flex-col gap-10">
-      <LoggedNavbar bgColor={true} />
       <div className="flex flex-col lg:flex-row  gap-10 justify-between">
         <div className="flex flex-col gap-3 w-full">
           <h1 className="font-bold text-4xl">Your Product List</h1>
           <div className="lg:h-[54vh] flex flex-col gap-3 lg:overflow-y-scroll w-full px-1">
-            {cart?.cartItems?.length === 0 ? (
+            {cart?.cartItems?.length === 0 && cart ? (
               <div className="flex flex-col justify-center min-h-[50vh] items-center gap-3">
-                <img className="w-90 h-64" src="/images/emptyCart.png" alt="empty cart"/>
                 <h1 className="text-4xl font-bold">Your Cart is empty</h1>
                 <p className="max-w-md text-center">Looks like you have not added anything to your cart. Go ahead & explore top categories</p>
               </div>
@@ -162,12 +155,12 @@ const page = () => {
                 )}
               />
 
-              <button
+              <Button
                 type="submit"
-                className="w-full py-3 rounded-lg text-white bg-black border border-black dark:text-black dark:bg-white border-none dark:font-bold"
+                className="h-[50px]"
               >
                 Use promocode
-              </button>
+              </Button>
             </form>
           </Form>
         </div>

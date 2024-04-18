@@ -14,15 +14,19 @@ const UserSchema = new Schema({
       "Username invalid, it should contain 8-20 alphanumeric letters and be unique!",
     ],
   },
+  fullname : {
+    type: String,
+    required: true
+  },
+  verifiedEmail: {
+    type: Boolean,
+    required: true
+  },
   firstName: {
     type: String,
     required: true
   },
   lastName: {
-    type: String,
-    required: true
-  },
-  locale: {
     type: String,
     required: true
   },

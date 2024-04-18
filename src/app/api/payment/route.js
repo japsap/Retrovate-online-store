@@ -7,7 +7,6 @@ export const POST = async (req, res) => {
     const body = await req.json()
 
 
-
     const customer = await stripe.customers.create({
         metadata: {
             userId: body.userId
@@ -84,12 +83,24 @@ export const POST = async (req, res) => {
         line_items,
         mode: "payment",
         customer: customer._id,
-        success_url: `http://localhost:3000/success?order=${JSON.stringify(
-          req.body,
-        )}`,
+        success_url: `http://localhost:3000/success`,
         cancel_url: `http://localhost:3000/cart`,
       });
 
-      return new Response(JSON.stringify({ url: session.url }))
+      console.log(req.json());
 
+      return new Response(JSON.stringify({ url: session.url }))
+}
+
+
+export const GET = async (req, res) => {
+  const paymentIntents = await stripe.paymentIntents.list({
+    limit: 10,
+  });
+
+  const customerPurchaseHistory = await stripe.paymentIntents.retrieve({
+    
+  })
+
+  return new Response({ paymentIntents })
 }

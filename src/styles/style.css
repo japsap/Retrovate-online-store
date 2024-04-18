@@ -1,0 +1,86 @@
+.max-w-wrapper {
+  @apply max-w-7xl mx-auto py-5 px-5 xl:px-5;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex items-center justify-between;
+}
+
+.flex-between-column {
+  @apply flex flex-col items-center justify-between;
+}
+
+.flex-center-column {
+  @apply flex flex-col items-center justify-center;
+}
+
+.animation {
+  @apply transition-all duration-300;
+}
+
+.sidebar {
+  @apply fixed flex flex-col gap-5 p-5 left-[-110%]  top-0 min-h-screen w-full z-[10000] bg-white;
+}
+.sidebar.active {
+  @apply left-[0];
+}
+
+.button-icon {
+  @apply flex items-center gap-3;
+}
+
+.main-border{
+ @apply border border-[#dbdbdb] dark:border-[#262626]
+}
+
+.text-underline::after {
+  content: "";
+  background: var(--mainColor);
+  width: 100%;
+  height: 1px;
+  display: block;
+  margin: auto;
+}
+.hover-img-effect {
+  position: relative;
+  min-height: 400px;
+  width: 100%;
+}
+.hover-img-effect > img {
+  position: absolute;
+  width: 70%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin: 0 auto;
+}
+
+.hover-img-effect > img:last-of-type {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+}
+
+.hover-img-effect:hover > img:last-of-type {
+  opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .hover-img-effect > img {
+    width: 80%;
+  }
+}
+.gradient-line {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 21%,
+    rgba(255, 255, 255, 1) 49%,
+    rgba(0, 0, 0, 0) 81%
+  );
+  width: 100%;
+  height: 1px;
+}

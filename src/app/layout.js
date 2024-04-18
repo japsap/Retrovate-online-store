@@ -1,11 +1,14 @@
+import { Inter } from "next/font/google";
 import "@styles/globals.css";
 
-import NextAuthProvider from "@components/providers/NextAuthProvider";
-import { ThemeProvider } from "@components/providers/ThemeProvider";
-import { ModeToggle } from "@components/fixedComponents";
-import { Toaster } from "@components/ui/toaster";
+import Provider from "@providers/NextAuthProvider";
+import NavbarComponent from "@components/NavbarComponent";
 import { CartProvider } from "@Context/CartContext";
+import FooterComponent from "@components/FooterComponent";
+import { Toaster } from "@components/ui/toaster";
+import { ThemeProvider } from "@providers/ThemeProvider";
 
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -13,27 +16,27 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
-      <body className={`dark:bg-[#121212]`}>
-        <CartProvider>
+      <CartProvider>
+        <body className={inter.className}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
-            <NextAuthProvider>
+            <Provider>
+              <NavbarComponent />
               <main>{children}</main>
 
-              <div className="fixed z-[1000000000000000000] right-3 bottom-3">
-                <ModeToggle border={false} />
-              </div>
               <Toaster />
-            </NextAuthProvider>
+              <FooterComponent />
+            </Provider>
           </ThemeProvider>
-        </CartProvider>
-      </body>
+        </body>
+      </CartProvider>
     </html>
   );
 }
