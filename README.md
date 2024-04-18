@@ -1,3 +1,3 @@
 # Documentation will be added after the second commits
 
-[Retrovate store](https://retrovate-online-store.vercel.app/)
+[SHOP. online store](https://shop-one-eosin.vercel.app/)
