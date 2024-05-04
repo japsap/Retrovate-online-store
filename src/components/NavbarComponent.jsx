@@ -54,7 +54,7 @@ const NavbarComponent = () => {
            <DialogModal />
           </div>
         ) : (
-          <DropdownMenu className="border-0 z-[10000000000] bg-red-600">
+          <DropdownMenu className="border-0 z-[10000000000] bg-red-600 drop-shadow-2xl">
             <DropdownMenuTrigger>
               <Image
                 src={session?.user?.image}
@@ -125,7 +125,7 @@ const NavbarComponent = () => {
             <X className="cursor-pointer text-red-600" />
           </div>
 
-          <div class="flex flex-col gap-3">
+          <div className="flex flex-col gap-3">
             {navbarLinks.map((link, id) => (
               <li key={id} className="list-none">
                 <Link href={link.path}>{link.name}</Link>

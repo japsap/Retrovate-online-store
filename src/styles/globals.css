@@ -13,6 +13,10 @@ html{
   --mainColor: #e6b400;
 }
 
+.max-width-wrapper{
+  @apply max-w-[105rem] mx-auto px-5 2xl:px-0
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -88,4 +92,17 @@ html{
 
 p{
   @apply text-stone-400
+}
+
+
+
+.addtocardbtn{
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.product-card:hover .addtocardbtn{
+  opacity: 1;
+  pointer-events: all;
 }

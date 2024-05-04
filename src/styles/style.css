@@ -33,8 +33,8 @@
   @apply flex items-center gap-3;
 }
 
-.main-border{
- @apply border border-[#dbdbdb] dark:border-[#262626]
+.main-border {
+  @apply border border-[#dbdbdb] dark:border-[#262626];
 }
 
 .text-underline::after {
@@ -45,35 +45,37 @@
   display: block;
   margin: auto;
 }
-.hover-img-effect {
-  position: relative;
-  min-height: 400px;
-  width: 100%;
-}
-.hover-img-effect > img {
-  position: absolute;
-  width: 70%;
-  left: 50%;
-  transform: translate(-50%, 0);
-  margin: 0 auto;
-}
+@media screen and (min-width: 992px) {
+  .hover-img-effect {
+    position: relative;
+    min-height: 400px;
+    width: 100%;
+  }
+  .hover-img-effect > img {
+    position: absolute;
+    width: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: 0 auto;
+  }
 
-.hover-img-effect > img:last-of-type {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  -moz-transition: opacity 0.5s ease-in-out;
-  -webkit-transition: opacity 0.5s ease-in-out;
-}
+  .hover-img-effect > img:last-of-type {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+  }
 
-.hover-img-effect:hover > img:last-of-type {
-  opacity: 1;
+  .hover-img-effect:hover > img:last-of-type {
+    opacity: 1;
+  }
 }
-
 @media screen and (max-width: 700px) {
   .hover-img-effect > img {
     width: 80%;
   }
 }
+
 .gradient-line {
   background: linear-gradient(
     90deg,
